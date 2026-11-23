@@ -23,7 +23,7 @@ export default function BeginningSection() {
   return (
     <section
       id="beginning"
-      className="relative py-24 md:py-32 lg:py-40 bg-soft-white overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 lg:py-40 bg-soft-white overflow-hidden"
       aria-label="Where It Began"
     >
       {/* Decorative background glow */}
@@ -32,7 +32,7 @@ export default function BeginningSection() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-6xl px-6 md:px-8">
+      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="The prologue"
           title={beginning.title}

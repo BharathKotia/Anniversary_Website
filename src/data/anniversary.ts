@@ -4,7 +4,7 @@ export const anniversaryContent: AnniversaryContent = {
   couple: {
     firstName: "Name One",
     secondName: "Name Two",
-    anniversaryDate: "23 November 2024",
+    anniversaryDate: "23 November 2023",
     title: "A Love Story, Written in Moments",
   },
 

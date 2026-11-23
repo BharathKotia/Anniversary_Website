@@ -48,7 +48,7 @@ export default function TimelineSection() {
   return (
     <section
       id="timeline"
-      className="relative py-20 md:py-28 lg:py-32 bg-soft-white overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-20 md:py-28 lg:py-32 bg-soft-white overflow-hidden"
     >
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
@@ -57,10 +57,10 @@ export default function TimelineSection() {
         />
 
         <div className="relative mt-8">
-          {/* Vertical center line — hidden on mobile, shown on md+ */}
+          {/* Vertical center line — left on mobile, center on md+ */}
           <div
             aria-hidden="true"
-            className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-champagne/40"
+            className="absolute left-4 sm:left-5 md:left-1/2 top-0 bottom-0 w-px -translate-x-1/2 bg-champagne/40"
           />
 
           <div className="relative space-y-12 md:space-y-16">
@@ -84,7 +84,7 @@ export default function TimelineSection() {
                   <div
                     aria-hidden="true"
                     className={cn(
-                      "absolute left-4 md:left-1/2 top-2 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-champagne transition-colors duration-300",
+                      "absolute left-4 sm:left-5 md:left-1/2 top-2 z-10 h-4 w-4 -translate-x-1/2 rounded-full border-2 border-champagne transition-colors duration-300",
                       "bg-deep-wine"
                     )}
                   />
@@ -92,14 +92,14 @@ export default function TimelineSection() {
                   {/* Connector pulse ring */}
                   <div
                     aria-hidden="true"
-                    className="absolute left-4 md:left-1/2 top-2 z-[5] h-4 w-4 -translate-x-1/2 rounded-full bg-deep-wine/20 animate-ping"
+                    className="absolute left-4 sm:left-5 md:left-1/2 top-2 z-[5] h-4 w-4 -translate-x-1/2 rounded-full bg-deep-wine/20 animate-ping"
                     style={{ animationDuration: "3s" }}
                   />
 
                   {/* Content container */}
                   <div
                     className={cn(
-                      "ml-10 md:ml-0 md:w-[calc(50%-2rem)]",
+                      "ml-12 sm:ml-14 md:ml-0 md:w-[calc(50%-2rem)]",
                       isEven
                         ? "md:mr-auto md:pr-8 md:text-right"
                         : "md:ml-auto md:pl-8 md:text-left"
@@ -151,7 +151,7 @@ export default function TimelineSection() {
           {/* End cap for the timeline line */}
           <div
             aria-hidden="true"
-            className="absolute left-4 md:left-1/2 bottom-0 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-champagne/60"
+            className="absolute left-4 sm:left-5 md:left-1/2 bottom-0 z-10 h-3 w-3 -translate-x-1/2 rounded-full bg-champagne/60"
           />
         </div>
       </div>

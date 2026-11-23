@@ -33,8 +33,18 @@ export default function Home() {
       </main>
 
       {/* Elegant Footer */}
-      <footer className="relative border-t border-dusty-rose/20 bg-soft-white py-12 px-6 text-center">
-        <div className="mx-auto max-w-xl space-y-4">
+      <footer className="relative min-h-screen border-t border-dusty-rose/20 bg-soft-white flex flex-col items-center justify-center gap-10 px-4 sm:px-6 text-center">
+        {/* Subtle background glow */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 60%, rgba(232,201,193,0.18) 0%, transparent 70%)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative mx-auto max-w-xl space-y-4">
           <div className="flex items-center justify-center gap-2 text-deep-wine">
             <Heart className="h-4 w-4 fill-deep-wine" />
             <span className="font-display font-medium text-lg">
@@ -49,6 +59,23 @@ export default function Home() {
 
           <p className="font-handwritten text-lg text-champagne">
             Crafted with love, written in moments
+          </p>
+        </div>
+
+        {/* Creator credit */}
+        <div className="relative mt-4 flex flex-col items-center gap-1">
+          <div className="h-px w-16 bg-champagne/40 mb-4" aria-hidden="true" />
+          <p className="font-body text-xs text-deep-brown/40 tracking-wide uppercase">
+            Created with love by
+          </p>
+          <p className="font-handwritten text-2xl md:text-3xl text-deep-wine/80">
+            Bharath Raj
+          </p>
+          <p className="font-body text-sm text-deep-brown/50 mt-1">
+            for{" "}
+            <span className="font-display font-medium text-deep-wine/70">
+              {couple.secondName}
+            </span>
           </p>
         </div>
       </footer>

@@ -24,7 +24,7 @@ export default function FinalRevealSection() {
   return (
     <section
       id="final-reveal"
-      className="relative py-24 md:py-32 lg:py-40 bg-ivory overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 lg:py-40 bg-ivory overflow-hidden"
       aria-label="The Final Surprise"
     >
       {/* Background radial glow */}
@@ -33,7 +33,7 @@ export default function FinalRevealSection() {
         aria-hidden="true"
       />
 
-      <div className="relative mx-auto max-w-4xl px-6 md:px-8 text-center">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <SectionHeading
           eyebrow="A Keepsake For You"
           title="One Last Thing..."
