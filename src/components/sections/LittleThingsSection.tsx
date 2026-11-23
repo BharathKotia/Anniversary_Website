@@ -14,7 +14,7 @@ export default function LittleThingsSection() {
   return (
     <section
       id="little-things"
-      className="relative py-20 md:py-28 lg:py-32 bg-ivory overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-20 md:py-28 lg:py-32 bg-ivory overflow-hidden"
     >
       {/* Subtle decorative background hearts */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">

@@ -26,14 +26,14 @@ export default function FutureSection() {
   return (
     <section
       id="future"
-      className="relative py-24 md:py-32 lg:py-40 bg-ivory overflow-hidden"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 lg:py-40 bg-ivory overflow-hidden"
     >
       {/* Subtle radial glow background */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-dusty-rose/5 blur-3xl" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-6xl px-6 md:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           eyebrow="What's ahead"
           title="Our Next Chapters"

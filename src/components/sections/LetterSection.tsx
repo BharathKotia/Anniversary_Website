@@ -18,7 +18,7 @@ export default function LetterSection() {
   return (
     <section
       id="letter"
-      className="relative py-24 md:py-32 lg:py-40 px-6"
+      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 lg:py-40 px-4 sm:px-6 lg:px-8"
       aria-label="A personal letter"
     >
       <div className="mx-auto max-w-2xl">

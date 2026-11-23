@@ -149,7 +149,7 @@ export default function OpeningSection() {
 
       {/* Top content */}
       <motion.div
-        className="relative z-10 text-center px-6 mb-10 md:mb-14"
+        className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 mb-10 md:mb-14 w-full"
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: prefersReducedMotion ? 0 : 0.9, ease: "easeOut" }}
@@ -157,7 +157,7 @@ export default function OpeningSection() {
         <span className="font-handwritten text-lg md:text-xl text-champagne block mb-3">
           {opening.eyebrow}
         </span>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-deep-brown tracking-tight leading-tight max-w-3xl mx-auto">
+        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-deep-brown tracking-tight leading-tight max-w-3xl text-center">
           {couple.title}
         </h1>
         <p className="mt-4 font-body text-base md:text-lg text-deep-brown/60">
