@@ -13,30 +13,26 @@ function PhotoPlaceholder({ aspectClass }: { aspectClass: string }) {
   return (
     <div
       className={cn(
-        "flex w-full items-center justify-center rounded-xl bg-gradient-to-br from-dusty-rose/30 via-champagne/20 to-deep-wine/20",
+        "flex w-full items-center justify-center rounded-xl bg-gradient-to-br from-wine via-wine/80 to-gold/20 border border-gold/30",
         aspectClass
       )}
     >
-      <Camera className="h-10 w-10 text-champagne/50 md:h-12 md:w-12" />
+      <div className="flex flex-col items-center gap-2">
+        <Camera className="h-10 w-10 text-gold/60 md:h-12 md:w-12" />
+        <span className="font-handwritten text-sm text-cream/50">A captured moment</span>
+      </div>
     </div>
   );
 }
 
-/** Masonry column assignments — 6 photos across 3 columns */
-const COLUMN_ASSIGNMENTS: Record<number, number[]> = {
-  3: [0, 1, 2, 0, 1, 2],
-  2: [0, 1, 0, 1, 0, 1],
-  1: [0, 0, 0, 0, 0, 0],
-};
-
-/** Different aspect ratios to give masonry variety */
+/** Aspect ratio patterns for true masonry diversity */
 const ASPECT_CLASSES = [
-  "aspect-[3/4]",   // tall portrait
-  "aspect-[4/5]",   // portrait
-  "aspect-[1/1]",   // square
-  "aspect-[4/3]",   // landscape
-  "aspect-[3/4]",   // tall portrait
-  "aspect-[1/1]",   // square
+  "aspect-[3/4]", // Portrait
+  "aspect-[4/5]", // Tall Portrait
+  "aspect-[1/1]", // Square
+  "aspect-[4/3]", // Landscape
+  "aspect-[3/4]", // Portrait
+  "aspect-[1/1]", // Square
 ];
 
 export default function GallerySection() {
@@ -69,118 +65,102 @@ export default function GallerySection() {
   }, []);
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 40, scale: 0.97 },
+    hidden: { opacity: 0, y: 30, scale: 0.98 },
     visible: (i: number) => ({
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.6, delay: i * 0.1, ease: "easeOut" as const },
+      transition: { duration: 0.6, delay: i * 0.08, ease: "easeOut" as const },
     }),
-  };
-
-  /** Build 3 masonry columns */
-  const columns = [0, 1, 2].map((colIdx) =>
-    gallery
-      .map((photo, i) => ({ photo, i }))
-      .filter(({ i }) => COLUMN_ASSIGNMENTS[3][i % gallery.length] === colIdx)
-  );
-
-  const renderPhoto = (photo: (typeof gallery)[0], index: number) => {
-    const hasError = imageErrors.has(index);
-    const aspectClass = ASPECT_CLASSES[index % ASPECT_CLASSES.length];
-
-    return (
-      <motion.article
-        key={`${photo.src}-${index}`}
-        custom={index}
-        variants={itemVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-60px" }}
-        className="group relative cursor-pointer overflow-hidden rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300"
-        onClick={() => openLightbox(index)}
-        role="button"
-        tabIndex={0}
-        aria-label={`View photo: ${photo.caption}`}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openLightbox(index);
-          }
-        }}
-      >
-        {hasError ? (
-          <PhotoPlaceholder aspectClass={aspectClass} />
-        ) : (
-          <div className={cn("relative w-full overflow-hidden", aspectClass)}>
-            <Image
-              src={photo.src}
-              alt={photo.alt}
-              fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-              onError={() => handleImageError(index)}
-            />
-          </div>
-        )}
-
-        {/* Caption overlay */}
-        <div
-          className={cn(
-            "absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-deep-brown/70 via-deep-brown/20 to-transparent p-4 transition-opacity duration-300",
-            "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100",
-            hasError && "opacity-100"
-          )}
-        >
-          <p className="font-display text-sm font-medium text-soft-white md:text-base">
-            {photo.caption}
-          </p>
-          <span className="mt-0.5 font-handwritten text-xs text-dusty-rose/90 md:text-sm">
-            {photo.date}
-          </span>
-        </div>
-
-        {/* Focus ring */}
-        <div className="pointer-events-none absolute inset-0 rounded-xl ring-champagne ring-offset-2 ring-offset-soft-white group-focus-visible:ring-2" />
-      </motion.article>
-    );
   };
 
   return (
     <section
       id="gallery"
-      className="relative min-h-screen overflow-hidden bg-soft-white py-20 md:py-28 lg:py-32"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center bg-wine py-24 md:py-32 lg:py-40 overflow-hidden text-center"
+      aria-label="Photo Gallery"
     >
-      {/* Subtle decorative background */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-dusty-rose/5 via-transparent to-transparent" />
+      {/* Background glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 40%, rgba(201,168,108,0.08) 0%, transparent 70%)",
+        }}
+      />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading eyebrow="Captured moments" title="Our Gallery" />
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+        <SectionHeading
+          eyebrow="Captured moments"
+          title="Our Gallery"
+          subtitle="Glimpses of love, laughter, and every little moment in between."
+          light={true}
+        />
 
-        {/* ── Masonry grid: 1 col mobile → 2 col sm → 3 col lg ── */}
-        <div className="hidden lg:flex gap-4 items-start">
-          {columns.map((col, colIdx) => (
-            <div key={colIdx} className="flex-1 flex flex-col gap-4">
-              {col.map(({ photo, i }) => renderPhoto(photo, i))}
-            </div>
-          ))}
-        </div>
+        {/* ── Native CSS Multi-Column Masonry (100% centered, responsive, zero overflow) ── */}
+        <div className="w-full columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance] text-left">
+          {gallery.map((photo, index) => {
+            const hasError = imageErrors.has(index);
+            const aspectClass = ASPECT_CLASSES[index % ASPECT_CLASSES.length];
 
-        {/* 2-column masonry for sm–lg */}
-        <div className="hidden sm:flex lg:hidden gap-4 items-start">
-          {[0, 1].map((colIdx) => (
-            <div key={colIdx} className="flex-1 flex flex-col gap-4">
-              {gallery
-                .map((photo, i) => ({ photo, i }))
-                .filter(({ i }) => COLUMN_ASSIGNMENTS[2][i % gallery.length] === colIdx)
-                .map(({ photo, i }) => renderPhoto(photo, i))}
-            </div>
-          ))}
-        </div>
+            return (
+              <div key={`${photo.src}-${index}`} className="break-inside-avoid mb-6 w-full">
+                <motion.article
+                  custom={index}
+                  variants={itemVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-40px" }}
+                  className="group relative cursor-pointer overflow-hidden rounded-xl border border-gold/30 bg-wine/70 shadow-xl transition-all duration-500 hover:border-gold hover:shadow-2xl hover:scale-[1.02]"
+                  onClick={() => openLightbox(index)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`View photo: ${photo.caption}`}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      openLightbox(index);
+                    }
+                  }}
+                >
+                  {hasError ? (
+                    <PhotoPlaceholder aspectClass={aspectClass} />
+                  ) : (
+                    <div className={cn("relative w-full overflow-hidden bg-wine/40", aspectClass)}>
+                      <Image
+                        src={photo.src}
+                        alt={photo.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                        onError={() => handleImageError(index)}
+                      />
+                    </div>
+                  )}
 
-        {/* Single-column for mobile */}
-        <div className="flex sm:hidden flex-col gap-4">
-          {gallery.map((photo, i) => renderPhoto(photo, i))}
+                  {/* Caption Overlay */}
+                  <div
+                    className={cn(
+                      "absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-wine/95 via-wine/40 to-transparent p-5 transition-opacity duration-300",
+                      "opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100",
+                      hasError && "opacity-100"
+                    )}
+                  >
+                    <p className="font-display text-lg font-normal text-cream">
+                      {photo.caption}
+                    </p>
+                    <span className="mt-1 font-handwritten text-base text-gold">
+                      {photo.date}
+                    </span>
+                  </div>
+
+                  {/* Focus ring */}
+                  <div className="pointer-events-none absolute inset-0 rounded-xl ring-gold ring-offset-2 ring-offset-wine group-focus-visible:ring-2" />
+                </motion.article>
+              </div>
+            );
+          })}
         </div>
       </div>
 

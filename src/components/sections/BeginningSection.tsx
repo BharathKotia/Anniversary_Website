@@ -23,96 +23,99 @@ export default function BeginningSection() {
   return (
     <section
       id="beginning"
-      className="relative min-h-screen flex flex-col justify-center py-24 md:py-32 lg:py-40 bg-soft-white overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center py-24 md:py-32 lg:py-40 bg-cream overflow-hidden text-center"
       aria-label="Where It Began"
     >
-      {/* Decorative background glow */}
+      {/* Subtle warm glow background */}
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,_var(--tw-gradient-stops))] from-dusty-rose/15 via-transparent to-transparent"
+        className="pointer-events-none absolute inset-0"
         aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(ellipse at 50% 50%, rgba(88,11,27,0.06) 0%, transparent 70%)",
+        }}
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
         <SectionHeading
           eyebrow="The prologue"
           title={beginning.title}
           subtitle={`Where two paths crossed on ${beginning.date}`}
+          light={false}
         />
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-14 items-center">
-          {/* Narrative text card */}
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="lg:col-span-7 flex flex-col justify-center space-y-6"
-          >
-            <div className="inline-flex items-center gap-2 rounded-full border border-champagne/30 bg-champagne/10 px-4 py-1.5 w-fit">
-              <Calendar className="h-4 w-4 text-champagne" />
-              <span className="font-body text-sm font-medium text-deep-brown/80">
-                {beginning.date}
+        {/* Centered Wedding Photo Keepsake Card */}
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.8, delay: 0.15, ease: "easeOut" }}
+          className="w-full flex justify-center mb-10"
+        >
+          <div className="relative w-full max-w-sm sm:max-w-md bg-off-white p-4 sm:p-5 shadow-2xl shadow-wine/20 frame-gold transition-transform duration-500 hover:-translate-y-1">
+            {/* Washi tape decor */}
+            <div
+              className="absolute -top-3 left-1/2 -translate-x-1/2 w-28 h-6 bg-gold/25 -rotate-1 pointer-events-none"
+              aria-hidden="true"
+            />
+
+            <div className="relative aspect-[4/5] w-full overflow-hidden bg-cream-dim">
+              {imageError ? (
+                <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center">
+                  <div className="h-16 w-16 rounded-full bg-wine/10 flex items-center justify-center text-wine">
+                    <Heart className="h-8 w-8 text-wine fill-wine/20" />
+                  </div>
+                  <p className="font-display text-xl font-normal text-wine">Day One</p>
+                  <span className="font-handwritten text-base text-ink/60">
+                    {beginning.imageAlt}
+                  </span>
+                </div>
+              ) : (
+                <Image
+                  src={beginning.image}
+                  alt={beginning.imageAlt}
+                  fill
+                  sizes="(max-width: 640px) 90vw, 420px"
+                  className="object-cover"
+                  onError={() => setImageError(true)}
+                  priority
+                />
+              )}
+            </div>
+
+            <div className="mt-4 text-center">
+              <span className="font-handwritten text-xl sm:text-2xl text-wine/80">
+                The day everything changed ✨
               </span>
             </div>
+          </div>
+        </motion.div>
 
-            <p className="font-display text-2xl md:text-3xl font-medium leading-relaxed text-deep-wine/90 italic">
-              &ldquo;Some stories begin with grand gestures. Ours began with a simple hello.&rdquo;
-            </p>
+        {/* Centered Narrative Text Block */}
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+          className="flex flex-col items-center justify-center space-y-6 max-w-2xl mx-auto"
+        >
+          <div className="inline-flex items-center justify-center gap-2 border border-gold/50 bg-gold/10 px-5 py-1.5 rounded-full w-fit">
+            <Calendar className="h-4 w-4 text-gold" />
+            <span className="font-body text-xs sm:text-sm font-medium text-ink/85 tracking-widest uppercase">
+              {beginning.date}
+            </span>
+          </div>
 
-            <p className="font-body text-base md:text-lg leading-relaxed text-deep-brown/80">
-              {beginning.description}
-            </p>
+          <p className="font-display text-2xl sm:text-3xl md:text-4xl font-normal leading-relaxed text-wine italic text-center">
+            &ldquo;Some stories begin with grand gestures. Ours began with a simple hello.&rdquo;
+          </p>
 
-            <div className="pt-2 flex items-center gap-3 text-champagne font-handwritten text-xl">
-              <Sparkles className="h-5 w-5" />
-              <span>And neither of us looked back since</span>
-            </div>
-          </motion.div>
+          <p className="font-body text-base sm:text-lg leading-relaxed text-ink/80 text-center">
+            {beginning.description}
+          </p>
 
-          {/* Keepsake photo card */}
-          <motion.div
-            {...fadeUp}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="lg:col-span-5 flex justify-center"
-          >
-            <div className="relative w-full max-w-sm rounded-2xl bg-ivory p-4 md:p-5 shadow-[0_12px_40px_rgba(48,36,38,0.08)] ring-1 ring-dusty-rose/30 transition-transform duration-500 hover:-translate-y-1">
-              {/* Tape decor */}
-              <div
-                className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-6 bg-champagne/25 -rotate-2 rounded-sm pointer-events-none"
-                aria-hidden="true"
-              />
-
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-dusty-rose/20">
-                {imageError ? (
-                  <div className="flex h-full w-full flex-col items-center justify-center gap-3 p-6 text-center">
-                    <div className="h-14 w-14 rounded-full bg-champagne/20 flex items-center justify-center text-deep-wine">
-                      <Heart className="h-7 w-7 fill-deep-wine/20 text-deep-wine" />
-                    </div>
-                    <p className="font-display text-lg font-medium text-deep-wine">
-                      Day One
-                    </p>
-                    <span className="font-handwritten text-base text-deep-brown/60">
-                      {beginning.imageAlt}
-                    </span>
-                  </div>
-                ) : (
-                  <Image
-                    src={beginning.image}
-                    alt={beginning.imageAlt}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 400px"
-                    className="object-cover"
-                    onError={() => setImageError(true)}
-                  />
-                )}
-              </div>
-
-              <div className="mt-4 text-center">
-                <span className="font-handwritten text-xl text-deep-brown/75">
-                  The day everything changed ✨
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+          <div className="pt-2 flex items-center justify-center gap-3 text-gold font-handwritten text-xl sm:text-2xl">
+            <Sparkles className="h-5 w-5 text-gold" />
+            <span>And neither of us looked back since</span>
+            <Sparkles className="h-5 w-5 text-gold" />
+          </div>
+        </motion.div>
       </div>
     </section>
   );

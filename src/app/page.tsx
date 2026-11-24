@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import Preloader from "@/components/layout/Preloader";
 import StoryProgress from "@/components/layout/StoryProgress";
 import OpeningSection from "@/components/sections/OpeningSection";
 import BeginningSection from "@/components/sections/BeginningSection";
@@ -13,15 +17,20 @@ import { Heart } from "lucide-react";
 
 export default function Home() {
   const { couple } = anniversaryContent;
+  const [preloaderComplete, setPreloaderComplete] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-ivory text-deep-brown font-body selection:bg-dusty-rose selection:text-deep-brown">
+    <div className="relative min-h-screen bg-wine text-cream font-body selection:bg-gold selection:text-wine w-full overflow-x-hidden">
+      {/* ── Exact Expanding Circle & Floating Items Preloader ── */}
+      <Preloader onComplete={() => setPreloaderComplete(true)} />
+
       {/* Story Progress Indicator */}
       <StoryProgress />
 
       {/* Main Experience Chapters */}
-      <main>
-        <OpeningSection />
+      <main className="w-full overflow-x-hidden">
+        {/* Hero Section with Text Reveal Animation */}
+        <OpeningSection startAnimation={preloaderComplete} />
         <BeginningSection />
         <GallerySection />
         <TimelineSection />
@@ -33,47 +42,47 @@ export default function Home() {
       </main>
 
       {/* Elegant Footer */}
-      <footer className="relative min-h-screen border-t border-dusty-rose/20 bg-soft-white flex flex-col items-center justify-center gap-10 px-4 sm:px-6 text-center">
+      <footer className="relative min-h-screen border-t border-gold/30 bg-wine flex flex-col items-center justify-center gap-10 px-4 sm:px-6 text-center w-full">
         {/* Subtle background glow */}
         <div
           className="pointer-events-none absolute inset-0"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 60%, rgba(232,201,193,0.18) 0%, transparent 70%)",
+              "radial-gradient(ellipse at 50% 60%, rgba(201,168,108,0.1) 0%, transparent 70%)",
           }}
           aria-hidden="true"
         />
 
         <div className="relative mx-auto max-w-xl space-y-4">
-          <div className="flex items-center justify-center gap-2 text-deep-wine">
-            <Heart className="h-4 w-4 fill-deep-wine" />
-            <span className="font-display font-medium text-lg">
+          <div className="flex items-center justify-center gap-2 text-gold">
+            <Heart className="h-4 w-4 fill-gold" />
+            <span className="font-display font-normal text-2xl tracking-wide text-cream">
               {couple.firstName} &amp; {couple.secondName}
             </span>
-            <Heart className="h-4 w-4 fill-deep-wine" />
+            <Heart className="h-4 w-4 fill-gold" />
           </div>
 
-          <p className="font-body text-sm text-deep-brown/60">
+          <p className="font-body text-xs sm:text-sm text-cream/60 tracking-widest uppercase">
             {couple.anniversaryDate} &bull; {couple.title}
           </p>
 
-          <p className="font-handwritten text-lg text-champagne">
+          <p className="font-handwritten text-xl text-gold">
             Crafted with love, written in moments
           </p>
         </div>
 
         {/* Creator credit */}
-        <div className="relative mt-4 flex flex-col items-center gap-1">
-          <div className="h-px w-16 bg-champagne/40 mb-4" aria-hidden="true" />
-          <p className="font-body text-xs text-deep-brown/40 tracking-wide uppercase">
+        <div className="relative mt-4 flex flex-col items-center gap-1.5">
+          <div className="h-px w-20 bg-gold/50 mb-4" aria-hidden="true" />
+          <p className="font-body text-xs text-cream/50 tracking-[0.25em] uppercase">
             Created with love by
           </p>
-          <p className="font-handwritten text-2xl md:text-3xl text-deep-wine/80">
+          <p className="font-display text-3xl sm:text-4xl text-gold font-normal">
             Bharath Raj
           </p>
-          <p className="font-body text-sm text-deep-brown/50 mt-1">
+          <p className="font-body text-sm text-cream/60 mt-1">
             for{" "}
-            <span className="font-display font-medium text-deep-wine/70">
+            <span className="font-display text-xl text-cream font-normal">
               {couple.secondName}
             </span>
           </p>

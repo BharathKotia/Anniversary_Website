@@ -66,7 +66,7 @@ export default function StoryProgress() {
             <button
               key={chapter.id}
               onClick={() => scrollToSection(chapter.id)}
-              className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne rounded-full"
+              className="group flex items-center gap-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-full"
               aria-label={`Go to ${chapter.label}`}
               aria-current={index === activeIndex ? "step" : undefined}
             >
@@ -77,10 +77,10 @@ export default function StoryProgress() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 8 }}
                     className={cn(
-                      "text-xs font-body whitespace-nowrap px-2 py-1 rounded-full transition-colors",
+                      "text-xs font-body whitespace-nowrap px-3 py-1 rounded-full transition-colors border",
                       index === activeIndex
-                        ? "text-deep-wine bg-dusty-rose/30"
-                        : "text-deep-brown/50 bg-ivory/80"
+                        ? "text-cream bg-wine border-gold"
+                        : "text-cream/70 bg-wine/80 border-gold/30"
                     )}
                   >
                     {chapter.label}
@@ -91,8 +91,8 @@ export default function StoryProgress() {
                 className={cn(
                   "block rounded-full transition-all duration-300",
                   index === activeIndex
-                    ? "w-3 h-3 bg-deep-wine shadow-md shadow-deep-wine/30"
-                    : "w-2 h-2 bg-champagne/40 group-hover:bg-champagne"
+                    ? "w-3 h-3 bg-gold shadow-md shadow-gold/40 scale-125"
+                    : "w-2 h-2 bg-gold/40 group-hover:bg-gold"
                 )}
               />
             </button>
