@@ -40,10 +40,10 @@ export default function TimelineSection() {
   return (
     <section
       id="timeline"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center py-24 md:py-32 lg:py-40 bg-cream overflow-hidden text-center"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center py-28 sm:py-36 md:py-44 lg:py-52 bg-cream overflow-hidden text-center"
       aria-label="Our Milestones"
     >
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex flex-col items-center justify-center">
         <SectionHeading
           eyebrow="Milestones"
           title="Our Journey Together"
@@ -51,7 +51,7 @@ export default function TimelineSection() {
           light={false}
         />
 
-        <div className="relative mt-8 w-full">
+        <div className="relative mt-10 md:mt-14 pb-10 md:pb-16 w-full">
           {/* Vertical center line */}
           <div
             aria-hidden="true"

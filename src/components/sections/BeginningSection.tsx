@@ -23,7 +23,7 @@ export default function BeginningSection() {
   return (
     <section
       id="beginning"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center py-24 md:py-32 lg:py-40 bg-cream overflow-hidden text-center"
+      className="relative min-h-screen w-full h-full flex flex-wrap items-center justify-center py-28 sm:py-36 md:py-44 lg:py-52 bg-cream overflow-hidden text-center"
       aria-label="Where It Began"
     >
       {/* Subtle warm glow background */}
@@ -36,7 +36,7 @@ export default function BeginningSection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
+      <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-12 flex flex-col items-center justify-center h-full  text-center">
         <SectionHeading
           eyebrow="The prologue"
           title={beginning.title}
@@ -95,12 +95,7 @@ export default function BeginningSection() {
           transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
           className="flex flex-col items-center justify-center space-y-6 max-w-2xl mx-auto"
         >
-          <div className="inline-flex items-center justify-center gap-2 border border-gold/50 bg-gold/10 px-5 py-1.5 rounded-full w-fit">
-            <Calendar className="h-4 w-4 text-gold" />
-            <span className="font-body text-xs sm:text-sm font-medium text-ink/85 tracking-widest uppercase">
-              {beginning.date}
-            </span>
-          </div>
+    
 
           <p className="font-display text-2xl sm:text-3xl md:text-4xl font-normal leading-relaxed text-wine italic text-center">
             &ldquo;Some stories begin with grand gestures. Ours began with a simple hello.&rdquo;
