@@ -38,7 +38,7 @@ export default function BeginningSection() {
 
       <div className="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-12 flex flex-col items-center justify-center h-full  text-center">
         <SectionHeading
-          eyebrow="The prologue"
+        
           title={beginning.title}
           subtitle={`Where two paths crossed on ${beginning.date}`}
           light={false}

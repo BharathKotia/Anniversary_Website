@@ -165,11 +165,11 @@ export default function OpeningSection({
         </div>
 
         {/* Headline with Elastic Character Pop Reveal */}
-        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-cream tracking-tight leading-tight max-w-3xl drop-shadow-lg select-none">
+        <h1 className="font-display flex text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-cream tracking-tight leading-tight max-w-3xl drop-shadow-lg select-none">
           {titleChars.map((char, index) => (
             <span
               key={index}
-              className="hero-headline-char inline-block will-change-transform"
+              className="hero-headline-char font-handwritten inline-block will-change-transform"
             >
               {char === " " ? "\u00A0" : char}
             </span>
@@ -197,7 +197,7 @@ export default function OpeningSection({
 
       {/* ── Bottom Section with Tagline & Scroll Cue ── */}
       <div className="hero-footer-cta relative z-10 w-full pb-8 sm:pb-12 px-4 text-center flex flex-col items-center">
-        <p className="font-handwritten text-xl sm:text-2xl md:text-3xl text-cream/90 drop-shadow-md max-w-md">
+        <p className="hero-headline-char text-xl sm:text-2xl md:text-3xl text-cream/90 drop-shadow-md max-w-md">
           &ldquo;{opening.message}&rdquo;
         </p>
 
