@@ -10,7 +10,6 @@ import TimelineSection from "@/components/sections/TimelineSection";
 import LittleThingsSection from "@/components/sections/LittleThingsSection";
 import LetterSection from "@/components/sections/LetterSection";
 import CelebrationSection from "@/components/sections/CelebrationSection";
-import FutureSection from "@/components/sections/FutureSection";
 import FinalRevealSection from "@/components/sections/FinalRevealSection";
 import { anniversaryContent } from "@/data/anniversary";
 import { Heart } from "lucide-react";
@@ -37,7 +36,6 @@ export default function Home() {
         <LittleThingsSection />
         <LetterSection />
         <CelebrationSection />
-        <FutureSection />
         <FinalRevealSection />
       </main>
 
