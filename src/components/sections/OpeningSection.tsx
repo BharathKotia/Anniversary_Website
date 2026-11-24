@@ -158,8 +158,8 @@ export default function OpeningSection({
       {/* ── Top Header Area: Spacious breathing room between top of screen and eyebrow ── */}
       <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28 lg:pt-32 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Eyebrow with reveal mask */}
-        <div className="overflow-hidden mb-3">
-          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm tracking-[0.3em] uppercase text-gold font-medium drop-shadow-md">
+        <div className="overflow-hidden mt-3 mb-3">
+          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm  uppercase text-gold font-medium drop-shadow-md  ">
             {opening.eyebrow}
           </span>
         </div>
@@ -185,10 +185,8 @@ export default function OpeningSection({
               </span>
             ))}
           </span>
-          <span className="text-gold/70 text-sm hidden sm:inline">&bull;</span>
-          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm tracking-widest uppercase text-cream/80">
-            {couple.anniversaryDate}
-          </span>
+          
+      
         </div>
 
         {/* Delicate divider line */}

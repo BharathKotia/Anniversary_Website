@@ -5,7 +5,7 @@ export const anniversaryContent: AnniversaryContent = {
     firstName: "Vibhus",
     secondName: "Bharath",
     anniversaryDate: "27 November 2025",
-    title: "A Love Story, Written in Moments",
+    title: "Happy Wedding Anniversary Vibhusss ♡ ",
   },
 
   opening: {
@@ -16,47 +16,47 @@ export const anniversaryContent: AnniversaryContent = {
 
   beginning: {
     title: "It all started here",
-    date: "23 November 2022",
+    date: "16 April 2022",
     description:
       "Some stories begin with grand gestures. Ours began with a simple hello — the kind that changes everything without you even realising it. That day, the world shifted just a little, and suddenly, everything started to make a bit more sense.",
-    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2012.20.44%20PM.jpeg",
+    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(1).jpeg?updatedAt=1795506629723",
     imageAlt: "A meaningful photograph from the beginning",
   },
 
   gallery: [
     {
-      src: "/images/gallery/memory-01.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(2).jpeg",
       alt: "Our first adventure together",
       caption: "The first of many adventures",
       date: "January 2023",
     },
     {
-      src: "/images/gallery/memory-02.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/2bf475a2-a486-4f3c-90b1-be04d03da2ea.jpg",
       alt: "A quiet evening together",
       caption: "Evenings like these",
       date: "March 2023",
       featured: true,
     },
     {
-      src: "/images/gallery/memory-03.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010(1).42",
       alt: "Exploring a new place",
       caption: "Lost and found",
       date: "June 2023",
     },
     {
-      src: "/images/gallery/memory-04.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.25%20PM.jpeg",
       alt: "Celebrating together",
       caption: "Celebrating us",
       date: "August 2023",
     },
     {
-      src: "/images/gallery/memory-05.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.12%20PM.jpeg",
       alt: "A favourite moment",
       caption: "My favourite smile",
       date: "November 2023",
     },
     {
-      src: "/images/gallery/memory-06.webp",
+      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.10%20PM%20(1).jpeg",
       alt: "Together in a new place",
       caption: "New places, same us",
       date: "February 2024",

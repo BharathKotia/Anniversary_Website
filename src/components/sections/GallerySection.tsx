@@ -77,7 +77,7 @@ export default function GallerySection() {
   return (
     <section
       id="gallery"
-      className="relative min-h-screen w-full flex flex-col items-center justify-center bg-wine py-24 md:py-32 lg:py-40 overflow-hidden text-center"
+      className="relative min-h-screen w-full flex flex-col items-center justify-center bg-wine py-28 sm:py-36 md:py-44 lg:py-52 overflow-hidden text-center"
       aria-label="Photo Gallery"
     >
       {/* Background glow */}
@@ -90,7 +90,7 @@ export default function GallerySection() {
         }}
       />
 
-      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 flex flex-col items-center justify-center">
         <SectionHeading
           eyebrow="Captured moments"
           title="Our Gallery"
@@ -99,7 +99,7 @@ export default function GallerySection() {
         />
 
         {/* ── Native CSS Multi-Column Masonry (100% centered, responsive, zero overflow) ── */}
-        <div className="w-full columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance] text-left">
+        <div className="w-full columns-1 sm:columns-2 lg:columns-3 gap-6 [column-fill:_balance] text-left mt-6 md:mt-10 mb-8 md:mb-12">
           {gallery.map((photo, index) => {
             const hasError = imageErrors.has(index);
             const aspectClass = ASPECT_CLASSES[index % ASPECT_CLASSES.length];
