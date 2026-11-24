@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   motion,
   useInView,
@@ -11,47 +11,38 @@ import { Volume2, VolumeX } from "lucide-react";
 import { anniversaryContent } from "@/data/anniversary";
 import { cn } from "@/lib/utils";
 
-/* ------------------------------------------------------------------ */
-/*  Petal / confetti element types                                     */
-/* ------------------------------------------------------------------ */
-
 interface FloatingElement {
   id: number;
-  x: number; // start x (%)
-  size: number; // px
-  delay: number; // seconds
-  duration: number; // seconds
-  drift: number; // horizontal drift px
-  rotation: number; // degrees
+  x: number;
+  size: number;
+  delay: number;
+  duration: number;
+  drift: number;
+  rotation: number;
   kind: "circle" | "heart";
   color: string;
 }
 
 const PETAL_COLORS = [
-  "rgba(232,201,193,0.7)", // dusty-rose
-  "rgba(181,139,97,0.45)", // champagne
-  "rgba(118,45,60,0.35)", // deep-wine
-  "rgba(212,166,154,0.6)", // muted-rose
-  "rgba(247,240,232,0.8)", // ivory
+  "rgba(201,168,108,0.7)",  // gold
+  "rgba(247,234,215,0.7)",  // cream
+  "rgba(226,196,141,0.6)",  // gold-bright
+  "rgba(237,217,187,0.5)",  // cream-dim
 ];
 
 function generateElements(count: number): FloatingElement[] {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
     x: Math.random() * 100,
-    size: 6 + Math.random() * 12,
+    size: 8 + Math.random() * 14,
     delay: Math.random() * 6,
-    duration: 5 + Math.random() * 7,
+    duration: 6 + Math.random() * 7,
     drift: (Math.random() - 0.5) * 80,
     rotation: Math.random() * 360,
     kind: Math.random() > 0.5 ? "heart" : "circle",
     color: PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)],
   }));
 }
-
-/* ------------------------------------------------------------------ */
-/*  Heart SVG (pure CSS/SVG shape)                                     */
-/* ------------------------------------------------------------------ */
 
 function HeartShape({ color, size }: { color: string; size: number }) {
   return (
@@ -66,10 +57,6 @@ function HeartShape({ color, size }: { color: string; size: number }) {
     </svg>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  Single floating element                                            */
-/* ------------------------------------------------------------------ */
 
 function FloatingPetal({ el }: { el: FloatingElement }) {
   return (
@@ -106,10 +93,6 @@ function FloatingPetal({ el }: { el: FloatingElement }) {
     </motion.div>
   );
 }
-
-/* ------------------------------------------------------------------ */
-/*  Main section                                                       */
-/* ------------------------------------------------------------------ */
 
 export default function CelebrationSection() {
   const prefersReducedMotion = useReducedMotion();
@@ -150,7 +133,6 @@ export default function CelebrationSection() {
     };
   }, []);
 
-  /* Play / pause toggle */
   const toggleAudio = useCallback(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -166,7 +148,6 @@ export default function CelebrationSection() {
     }
   }, [isPlaying]);
 
-  /* Pause audio when section leaves viewport */
   useEffect(() => {
     if (!isInView && isPlaying && audioRef.current) {
       audioRef.current.pause();
@@ -186,10 +167,20 @@ export default function CelebrationSection() {
     <section
       id="celebration"
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden bg-gradient-to-b from-ivory to-dusty-rose/20 px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40"
+      className="relative min-h-screen w-full overflow-hidden bg-wine px-4 sm:px-6 lg:px-8 py-24 md:py-32 lg:py-40 flex flex-col items-center justify-center text-center"
       aria-label="Anniversary celebration"
     >
-      {/* Floating petals / confetti — only when in view & motion OK */}
+      {/* Background glow */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        aria-hidden="true"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 45%, rgba(201,168,108,0.15) 0%, transparent 65%)",
+        }}
+      />
+
+      {/* Floating petals */}
       {isInView && !prefersReducedMotion && (
         <div
           className="pointer-events-none absolute inset-0 overflow-hidden"
@@ -202,12 +193,12 @@ export default function CelebrationSection() {
       )}
 
       {/* Content */}
-      <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center justify-center text-center">
+      <div className="relative z-10 w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center">
         {/* Date eyebrow */}
         <motion.span
           {...fadeUp}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="mb-4 font-handwritten text-xl text-champagne md:text-2xl"
+          className="mb-4 font-body text-xs sm:text-sm tracking-[0.3em] uppercase text-gold"
         >
           {anniversaryDate}
         </motion.span>
@@ -216,7 +207,7 @@ export default function CelebrationSection() {
         <motion.h2
           {...fadeUp}
           transition={{ duration: 0.9, delay: 0.15, ease: "easeOut" }}
-          className="mb-6 font-display text-5xl font-bold tracking-tight text-deep-wine sm:text-6xl md:text-7xl lg:text-8xl"
+          className="mb-6 font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-normal tracking-tight text-cream"
         >
           {title}
         </motion.h2>
@@ -225,7 +216,7 @@ export default function CelebrationSection() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-          className="mb-8 h-px w-24 bg-champagne/60"
+          className="mb-8 h-px w-24 bg-gold/60"
           aria-hidden="true"
         />
 
@@ -233,7 +224,7 @@ export default function CelebrationSection() {
         <motion.p
           {...fadeUp}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="max-w-xl font-body text-lg leading-relaxed text-deep-brown/80 md:text-xl"
+          className="max-w-xl font-body text-lg sm:text-xl leading-relaxed text-cream/80"
         >
           {message}
         </motion.p>
@@ -252,26 +243,22 @@ export default function CelebrationSection() {
                 type="button"
                 onClick={toggleAudio}
                 className={cn(
-                  "group relative flex items-center gap-2 rounded-full px-5 py-2.5",
-                  "border border-champagne/40 bg-soft-white/80 backdrop-blur-sm",
-                  "font-body text-sm text-deep-brown/70 transition-all duration-300",
-                  "hover:border-champagne/60 hover:bg-soft-white hover:text-deep-brown",
-                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-champagne/50 focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
+                  "group relative flex items-center gap-2 px-6 py-3",
+                  "border border-gold/40 bg-wine/80 backdrop-blur-sm",
+                  "font-body text-sm text-cream transition-all duration-300",
+                  "hover:border-gold hover:bg-wine hover:shadow-lg hover:shadow-gold/15",
+                  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
                 )}
                 aria-label={isPlaying ? "Pause music" : "Play music"}
               >
                 {isPlaying ? (
-                  <Volume2
-                    size={18}
-                    className="text-champagne transition-colors group-hover:text-deep-wine"
-                  />
+                  <Volume2 size={18} className="text-gold" />
                 ) : (
-                  <VolumeX
-                    size={18}
-                    className="text-champagne/60 transition-colors group-hover:text-champagne"
-                  />
+                  <VolumeX size={18} className="text-gold/60" />
                 )}
-                <span>{isPlaying ? "Pause music" : "Play our song"}</span>
+                <span className="tracking-wider uppercase text-xs">
+                  {isPlaying ? "Pause Music" : "Play Our Song"}
+                </span>
               </button>
             </motion.div>
           )}

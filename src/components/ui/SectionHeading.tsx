@@ -9,6 +9,7 @@ interface SectionHeadingProps {
   subtitle?: string;
   className?: string;
   align?: "left" | "center";
+  /** true = section is on dark (wine) bg; false = light (cream) bg */
   light?: boolean;
 }
 
@@ -22,21 +23,20 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
       className={cn(
-        "mb-12 md:mb-16",
-        align === "center" && "text-center",
+        "mb-12 md:mb-16 w-full max-w-3xl mx-auto flex flex-col items-center justify-center text-center",
         className
       )}
     >
       {eyebrow && (
         <span
           className={cn(
-            "font-handwritten text-xl md:text-2xl mb-2 block",
-            light ? "text-dusty-rose" : "text-champagne"
+            "font-body text-xs md:text-sm tracking-[0.3em] uppercase mb-3 block text-center",
+            light ? "text-gold/90" : "text-wine/70"
           )}
         >
           {eyebrow}
@@ -44,8 +44,8 @@ export default function SectionHeading({
       )}
       <h2
         className={cn(
-          "font-display text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight",
-          light ? "text-soft-white" : "text-deep-brown"
+          "font-display text-4xl sm:text-5xl md:text-6xl font-normal tracking-tight leading-tight text-center",
+          light ? "text-cream" : "text-wine"
         )}
       >
         {title}
@@ -53,21 +53,21 @@ export default function SectionHeading({
       {subtitle && (
         <p
           className={cn(
-            "mt-4 font-body text-base md:text-lg max-w-2xl leading-relaxed",
-            align === "center" && "mx-auto",
-            light ? "text-dusty-rose/80" : "text-deep-brown/70"
+            "mt-4 font-body text-base md:text-lg max-w-xl leading-relaxed text-center",
+            light ? "text-cream/75" : "text-ink/75"
           )}
         >
           {subtitle}
         </p>
       )}
-      <div
-        className={cn(
-          "mt-6 h-px w-16",
-          align === "center" && "mx-auto",
-          light ? "bg-champagne/40" : "bg-champagne/60"
-        )}
-      />
+      <div className="mt-6 flex items-center justify-center w-full">
+        <div
+          className={cn(
+            "h-px w-24",
+            light ? "bg-gold/60" : "bg-gold/80"
+          )}
+        />
+      </div>
     </motion.div>
   );
 }

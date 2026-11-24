@@ -1,357 +1,219 @@
 "use client";
 
-import { useState, useCallback, useEffect, useMemo } from "react";
-import { motion, useReducedMotion, AnimatePresence } from "motion/react";
-import { cn } from "@/lib/utils";
+import { useEffect, useRef } from "react";
+import Image from "next/image";
+import gsap from "gsap";
 import { anniversaryContent } from "@/data/anniversary";
+import { ChevronDown } from "lucide-react";
 
-interface Particle {
-  id: number;
-  x: number;
-  y: number;
-  targetY: number;
-  targetX: number;
-  size: number;
-  duration: number;
-  delay: number;
-  opacity: number;
+interface OpeningSectionProps {
+  /** Triggered when the preloader begins fading out */
+  startAnimation?: boolean;
 }
 
-function FloatingParticles({ count = 30 }: { count?: number }) {
-  const prefersReducedMotion = useReducedMotion();
-  const [particles, setParticles] = useState<Particle[]>([]);
-
-  useEffect(() => {
-    setParticles(
-      Array.from({ length: count }, (_, i) => {
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        return {
-          id: i,
-          x,
-          y,
-          targetY: y - 20 - Math.random() * 15,
-          targetX: x + (Math.random() - 0.5) * 10,
-          size: Math.random() * 4 + 2,
-          duration: Math.random() * 12 + 10,
-          delay: Math.random() * 8,
-          opacity: Math.random() * 0.3 + 0.1,
-        };
-      })
-    );
-  }, [count]);
-
-  if (particles.length === 0) {
-    return null;
-  }
-
-  if (prefersReducedMotion) {
-    return (
-      <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-        {particles.map((p) => (
-          <div
-            key={p.id}
-            className="absolute rounded-full bg-dusty-rose"
-            style={{
-              left: `${p.x}%`,
-              top: `${p.y}%`,
-              width: p.size,
-              height: p.size,
-              opacity: p.opacity,
-            }}
-          />
-        ))}
-      </div>
-    );
-  }
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
-      {particles.map((p) => (
-        <motion.div
-          key={p.id}
-          className="absolute rounded-full bg-dusty-rose"
-          style={{
-            width: p.size,
-            height: p.size,
-          }}
-          initial={{
-            left: `${p.x}%`,
-            top: `${p.y}%`,
-            opacity: 0,
-          }}
-          animate={{
-            top: [`${p.y}%`, `${p.targetY}%`],
-            left: [`${p.x}%`, `${p.targetX}%`],
-            opacity: [0, p.opacity, p.opacity, 0],
-          }}
-          transition={{
-            duration: p.duration,
-            delay: p.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
-export default function OpeningSection() {
+export default function OpeningSection({
+  startAnimation = false,
+}: OpeningSectionProps) {
   const { couple, opening } = anniversaryContent;
-  const [isOpen, setIsOpen] = useState(false);
-  const [showCard, setShowCard] = useState(false);
-  const prefersReducedMotion = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
+  const hasAnimatedRef = useRef(false);
 
-  const handleOpen = useCallback(() => {
-    if (isOpen) return;
-    setIsOpen(true);
-  }, [isOpen]);
+  const heroImageUrl =
+    "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.14.26%20PM%20(1).jpeg";
 
+  const handleScrollDown = () => {
+    const beginningEl = document.getElementById("beginning");
+    if (beginningEl) {
+      beginningEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const playRevealAnimation = () => {
+    if (hasAnimatedRef.current) return;
+    hasAnimatedRef.current = true;
+
+    const chars = gsap.utils.toArray<HTMLElement>(".hero-headline-char");
+    const lines = gsap.utils.toArray<HTMLElement>(".hero-reveal-line");
+    const sub = gsap.utils.toArray<HTMLElement>(".hero-subheadline-char");
+    const cta = gsap.utils.toArray<HTMLElement>(".hero-footer-cta");
+
+    const tl = gsap.timeline({ delay: 0.05 });
+
+    // 1. Eyebrow slide in
+    tl.to(lines, {
+      yPercent: 0,
+      opacity: 1,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+    });
+
+    // 2. Headline characters elastic pop reveal (Exact curve: ease: "elastic.out(0.75, 0.25)")
+    tl.to(
+      chars,
+      {
+        y: 0,
+        opacity: 1,
+        scale: 1,
+        duration: 1.5,
+        stagger: 0.02,
+        ease: "elastic.out(0.75, 0.25)",
+      },
+      "-=0.4"
+    );
+
+    // 3. Subheadline names & date reveal
+    tl.to(
+      sub,
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        stagger: 0.015,
+        ease: "power3.out",
+      },
+      "-=0.9"
+    );
+
+    // 4. Footer message & scroll button
+    tl.to(
+      cta,
+      {
+        y: 0,
+        opacity: 1,
+        duration: 0.8,
+        ease: "power3.out",
+      },
+      "-=0.4"
+    );
+  };
+
+  // Set initial hidden transform positions on mount
   useEffect(() => {
-    if (!isOpen) return;
+    const ctx = gsap.context(() => {
+      const chars = gsap.utils.toArray<HTMLElement>(".hero-headline-char");
+      const sub = gsap.utils.toArray<HTMLElement>(".hero-subheadline-char");
+      const lines = gsap.utils.toArray<HTMLElement>(".hero-reveal-line");
+      const cta = gsap.utils.toArray<HTMLElement>(".hero-footer-cta");
 
-    const cardDelay = prefersReducedMotion ? 0 : 600;
-    const scrollDelay = prefersReducedMotion ? 300 : 2200;
+      gsap.set(chars, { y: 50, opacity: 0, scale: 0.5 });
+      gsap.set(sub, { y: 30, opacity: 0 });
+      gsap.set(lines, { yPercent: 100, opacity: 0 });
+      gsap.set(cta, { y: 20, opacity: 0 });
+    }, sectionRef);
 
-    const cardTimer = setTimeout(() => setShowCard(true), cardDelay);
-    const scrollTimer = setTimeout(() => {
-      const beginningSection = document.getElementById("beginning");
-      if (beginningSection) {
-        beginningSection.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth" });
-      }
-    }, scrollDelay);
+    return () => ctx.revert();
+  }, []);
 
-    return () => {
-      clearTimeout(cardTimer);
-      clearTimeout(scrollTimer);
-    };
-  }, [isOpen, prefersReducedMotion]);
+  // Trigger animation when startAnimation is true, or via fallback timer
+  useEffect(() => {
+    if (hasAnimatedRef.current) return;
+
+    if (startAnimation) {
+      playRevealAnimation();
+    } else {
+      // Safety fallback: if onComplete is delayed, trigger after 3.2s so text is NEVER stuck hidden
+      const fallbackTimer = setTimeout(() => {
+        if (!hasAnimatedRef.current) {
+          playRevealAnimation();
+        }
+      }, 3200);
+      return () => clearTimeout(fallbackTimer);
+    }
+  }, [startAnimation]);
+
+  // Split headline title into characters
+  const titleChars = couple.title.split("");
+  const coupleNames = `${couple.firstName} & ${couple.secondName}`;
 
   return (
     <section
+      ref={sectionRef}
       id="opening"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-ivory"
-      aria-label="Opening"
+      className="relative h-screen w-full overflow-hidden flex flex-col justify-between"
+      aria-label="Hero"
     >
-      {/* Background particles */}
-      <FloatingParticles />
+      {/* ── Fullscreen Background Image (100vw, 100vh) ── */}
+      <div className="absolute inset-0 z-0 w-full h-full">
+        <Image
+          src={heroImageUrl}
+          alt={coupleNames}
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
 
-      {/* Subtle radial glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background:
-            "radial-gradient(ellipse at 50% 40%, rgba(232,201,193,0.25) 0%, transparent 70%)",
-        }}
-      />
-
-      {/* Top content */}
-      <motion.div
-        className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 mb-10 md:mb-14 w-full"
-        initial={{ opacity: 0, y: 24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: prefersReducedMotion ? 0 : 0.9, ease: "easeOut" }}
-      >
-        <span className="font-handwritten text-lg md:text-xl text-champagne block mb-3">
-          {opening.eyebrow}
-        </span>
-        <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold text-deep-brown tracking-tight leading-tight max-w-3xl text-center">
-          {couple.title}
-        </h1>
-        <p className="mt-4 font-body text-base md:text-lg text-deep-brown/60">
-          {couple.firstName} &amp; {couple.secondName}
-        </p>
-        <p className="mt-1 font-handwritten text-lg md:text-xl text-champagne">
-          {couple.anniversaryDate}
-        </p>
-      </motion.div>
-
-      {/* Envelope */}
-      <motion.div
-        className="relative z-10"
-        initial={{ opacity: 0, y: 32 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          duration: prefersReducedMotion ? 0 : 0.9,
-          delay: prefersReducedMotion ? 0 : 0.4,
-          ease: "easeOut",
-        }}
-      >
+        {/* Dual overlay for pristine typography contrast */}
         <div
-          className="relative w-72 sm:w-80 md:w-96"
-          style={{ perspective: "800px" }}
-        >
-          {/* Envelope body */}
-          <div
-            className={cn(
-              "relative w-full aspect-[4/3] rounded-lg overflow-visible",
-              "bg-gradient-to-br from-dusty-rose to-muted-rose",
-              "shadow-lg"
-            )}
-          >
-            {/* Inner envelope lining */}
-            <div className="absolute inset-[3px] rounded-md bg-gradient-to-b from-soft-white/80 to-ivory/60" />
+          className="absolute inset-0 bg-gradient-to-b from-black/85 via-black/40 to-black/80 pointer-events-none"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 bg-wine/30 mix-blend-multiply pointer-events-none"
+          aria-hidden="true"
+        />
+      </div>
 
-            {/* Invitation card – slides up when envelope opens */}
-            <AnimatePresence>
-              {showCard && (
-                <motion.div
-                  className={cn(
-                    "absolute left-3 right-3 bottom-3 rounded-md",
-                    "bg-soft-white border border-dusty-rose/30",
-                    "flex flex-col items-center justify-center p-6 md:p-8",
-                    "shadow-md"
-                  )}
-                  initial={{ y: 0, opacity: 0 }}
-                  animate={{ y: -80, opacity: 1 }}
-                  transition={{
-                    duration: prefersReducedMotion ? 0 : 0.8,
-                    ease: [0.22, 1, 0.36, 1],
-                  }}
-                  style={{ minHeight: "70%" }}
-                >
-                  <span className="font-handwritten text-champagne text-lg mb-2">
-                    You are invited
-                  </span>
-                  <p className="font-display text-xl md:text-2xl text-deep-wine font-semibold text-center leading-snug">
-                    {opening.message}
-                  </p>
-                  <div className="mt-4 h-px w-12 bg-champagne/60" />
-                  <p className="mt-3 font-handwritten text-champagne text-base">
-                    {couple.firstName} &amp; {couple.secondName}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            {/* Triangular flap (top) */}
-            <motion.div
-              className="absolute top-0 left-0 w-full origin-top"
-              style={{
-                transformStyle: "preserve-3d",
-                zIndex: showCard ? 0 : 10,
-              }}
-              animate={
-                isOpen
-                  ? { rotateX: -180 }
-                  : { rotateX: 0 }
-              }
-              transition={{
-                duration: prefersReducedMotion ? 0 : 0.7,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              {/* Front of flap */}
-              <div
-                className="w-full"
-                style={{
-                  backfaceVisibility: "hidden",
-                }}
-              >
-                <svg
-                  viewBox="0 0 400 150"
-                  className="w-full h-auto block"
-                  preserveAspectRatio="none"
-                >
-                  <polygon
-                    points="0,0 400,0 200,150"
-                    className="fill-muted-rose"
-                  />
-                  <polygon
-                    points="4,2 396,2 200,145"
-                    className="fill-dusty-rose"
-                    style={{ filter: "brightness(0.95)" }}
-                  />
-                </svg>
-              </div>
-              {/* Back of flap (visible after flip) */}
-              <div
-                className="absolute top-0 left-0 w-full"
-                style={{
-                  backfaceVisibility: "hidden",
-                  transform: "rotateX(180deg)",
-                }}
-              >
-                <svg
-                  viewBox="0 0 400 150"
-                  className="w-full h-auto block"
-                  preserveAspectRatio="none"
-                >
-                  <polygon
-                    points="0,0 400,0 200,150"
-                    className="fill-ivory"
-                  />
-                </svg>
-              </div>
-            </motion.div>
-
-            {/* Bottom decorative V shape (behind card) */}
-            <div className="absolute bottom-0 left-0 w-full z-[1]">
-              <svg
-                viewBox="0 0 400 100"
-                className="w-full h-auto block"
-                preserveAspectRatio="none"
-              >
-                <polygon
-                  points="0,100 200,20 400,100"
-                  fill="rgba(181,139,97,0.15)"
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* Wax seal / button */}
-          {!isOpen && (
-            <motion.button
-              onClick={handleOpen}
-              className={cn(
-                "absolute -bottom-5 left-1/2 -translate-x-1/2 z-20",
-                "w-20 h-20 rounded-full",
-                "bg-gradient-to-br from-deep-wine to-deep-wine/80",
-                "flex items-center justify-center",
-                "shadow-lg shadow-deep-wine/25",
-                "cursor-pointer",
-                "group",
-                "focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne focus-visible:ring-offset-2 focus-visible:ring-offset-ivory"
-              )}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label={opening.buttonLabel}
-            >
-              {/* Seal texture rings */}
-              <div className="absolute inset-1 rounded-full border border-soft-white/20" />
-              <div className="absolute inset-2.5 rounded-full border border-soft-white/10" />
-              <span className="font-handwritten text-soft-white text-xs text-center leading-tight px-1 select-none group-hover:scale-105 transition-transform">
-                {opening.buttonLabel}
-              </span>
-            </motion.button>
-          )}
+      {/* ── Top Header Area: Spacious breathing room between top of screen and eyebrow ── */}
+      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28 lg:pt-32 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+        {/* Eyebrow with reveal mask */}
+        <div className="overflow-hidden mb-3">
+          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm tracking-[0.3em] uppercase text-gold font-medium drop-shadow-md">
+            {opening.eyebrow}
+          </span>
         </div>
-      </motion.div>
 
-      {/* Scroll hint (visible before opening) */}
-      {!isOpen && (
-        <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: prefersReducedMotion ? 0 : 1.5, duration: 0.6 }}
+        {/* Headline with Elastic Character Pop Reveal */}
+        <h1 className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-cream tracking-tight leading-tight max-w-3xl drop-shadow-lg select-none">
+          {titleChars.map((char, index) => (
+            <span
+              key={index}
+              className="hero-headline-char inline-block will-change-transform"
+            >
+              {char === " " ? "\u00A0" : char}
+            </span>
+          ))}
+        </h1>
+
+        {/* Names & Anniversary Subheadline */}
+        <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-cream/90 drop-shadow-md overflow-hidden">
+          <span className="font-display text-xl sm:text-2xl md:text-3xl text-gold-bright">
+            {coupleNames.split("").map((c, i) => (
+              <span key={i} className="hero-subheadline-char inline-block">
+                {c === " " ? "\u00A0" : c}
+              </span>
+            ))}
+          </span>
+          <span className="text-gold/70 text-sm hidden sm:inline">&bull;</span>
+          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm tracking-widest uppercase text-cream/80">
+            {couple.anniversaryDate}
+          </span>
+        </div>
+
+        {/* Delicate divider line */}
+        <div className="mt-5 flex items-center justify-center w-full">
+          <div className="h-px w-20 bg-gold/60 shadow-sm" />
+        </div>
+      </div>
+
+      {/* ── Bottom Section with Tagline & Scroll Cue ── */}
+      <div className="hero-footer-cta relative z-10 w-full pb-8 sm:pb-12 px-4 text-center flex flex-col items-center">
+        <p className="font-handwritten text-xl sm:text-2xl md:text-3xl text-cream/90 drop-shadow-md max-w-md">
+          &ldquo;{opening.message}&rdquo;
+        </p>
+
+        <button
+          onClick={handleScrollDown}
+          className="mt-5 group flex flex-col items-center gap-1.5 text-gold/80 hover:text-gold transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded-full p-2 cursor-pointer"
+          aria-label="Scroll down to begin our story"
         >
-          <motion.div
-            className="w-5 h-8 rounded-full border-2 border-champagne/40 flex justify-center pt-1.5"
-            animate={
-              prefersReducedMotion
-                ? {}
-                : { y: [0, 6, 0] }
-            }
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <div className="w-1 h-1.5 rounded-full bg-champagne/60" />
-          </motion.div>
-        </motion.div>
-      )}
+          <span className="font-body text-[10px] sm:text-xs tracking-[0.25em] uppercase text-cream/70 group-hover:text-cream">
+            Explore Our Story
+          </span>
+          <ChevronDown className="h-5 w-5 text-gold group-hover:text-gold-bright transition-transform duration-300 group-hover:translate-y-1" />
+        </button>
+      </div>
     </section>
   );
 }

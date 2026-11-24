@@ -20,16 +20,18 @@ export default function Button({
       whileHover={{ scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       className={cn(
-        "inline-flex items-center justify-center rounded-full font-body font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-champagne focus-visible:ring-offset-2 focus-visible:ring-offset-ivory disabled:opacity-50 disabled:pointer-events-none",
+        "inline-flex items-center justify-center font-body font-medium transition-colors duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+        // square corners per Viktor & Paula style
+        "rounded-none",
         variant === "primary" &&
-          "bg-deep-wine text-soft-white hover:bg-deep-wine/90 shadow-lg shadow-deep-wine/20",
+          "bg-wine text-cream hover:bg-wine/90 border border-gold/40 shadow-lg shadow-wine/30",
         variant === "secondary" &&
-          "bg-dusty-rose/30 text-deep-brown hover:bg-dusty-rose/50 border border-dusty-rose/40",
+          "bg-cream/10 text-cream hover:bg-cream/20 border border-cream/30",
         variant === "ghost" &&
-          "text-deep-brown hover:bg-dusty-rose/20",
-        size === "sm" && "px-4 py-2 text-sm",
-        size === "md" && "px-6 py-3 text-base",
-        size === "lg" && "px-8 py-4 text-lg",
+          "text-cream hover:bg-cream/10",
+        size === "sm" && "px-5 py-2 text-sm tracking-wide",
+        size === "md" && "px-7 py-3 text-base tracking-wide",
+        size === "lg" && "px-9 py-4 text-lg tracking-wide",
         className
       )}
       {...props}

@@ -2,9 +2,9 @@ import type { AnniversaryContent } from "@/types/anniversary";
 
 export const anniversaryContent: AnniversaryContent = {
   couple: {
-    firstName: "Name One",
-    secondName: "Name Two",
-    anniversaryDate: "23 November 2023",
+    firstName: "Vibhus",
+    secondName: "Bharath",
+    anniversaryDate: "27 November 2025",
     title: "A Love Story, Written in Moments",
   },
 
@@ -19,7 +19,7 @@ export const anniversaryContent: AnniversaryContent = {
     date: "23 November 2022",
     description:
       "Some stories begin with grand gestures. Ours began with a simple hello — the kind that changes everything without you even realising it. That day, the world shifted just a little, and suddenly, everything started to make a bit more sense.",
-    image: "/images/hero/beginning.webp",
+    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2012.20.44%20PM.jpeg",
     imageAlt: "A meaningful photograph from the beginning",
   },
 
