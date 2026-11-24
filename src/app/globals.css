@@ -37,9 +37,9 @@
   --color-soft-white:  var(--color-off-white);
   --color-muted-rose:  var(--color-cream-dim);
 
-  --font-display:      "Instrument Serif", Georgia, serif;
-  --font-body:         "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-handwritten:  "Caveat", cursive;
+  --font-display:      "Cormorant", Georgia, serif;
+  --font-body:         "Jost", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-handwritten:  "Pinyon Script", cursive;
 }
 
 * {
