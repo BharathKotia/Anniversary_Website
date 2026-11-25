@@ -16,6 +16,7 @@ import { Heart } from "lucide-react";
 export default function Home() {
   const { couple } = anniversaryContent;
   const [preloaderComplete, setPreloaderComplete] = useState(false);
+  const [isAnniversaryRevealed, setIsAnniversaryRevealed] = useState(false);
 
   return (
     <div className="relative min-h-screen bg-wine text-cream font-body selection:bg-gold selection:text-wine w-full" style={{ overflowX: "clip" }}>
@@ -23,7 +24,7 @@ export default function Home() {
       <Preloader onComplete={() => setPreloaderComplete(true)} />
 
       {/* Story Progress Indicator */}
-      <StoryProgress />
+      <StoryProgress showCelebration={isAnniversaryRevealed} />
 
       {/* Main Experience Chapters */}
       <main className="w-full" style={{ overflowX: "clip" }}>
@@ -33,8 +34,8 @@ export default function Home() {
         <GallerySection />
         <LittleThingsSection />
         <LetterSection />
-        <CelebrationSection />
-        <FinalRevealSection />
+        <FinalRevealSection onReveal={() => setIsAnniversaryRevealed(true)} />
+        {isAnniversaryRevealed && <CelebrationSection />}
       </main>
 
       {/* Elegant Footer */}

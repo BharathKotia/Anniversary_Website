@@ -4,18 +4,23 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 
-const chapters = [
+const baseChapters = [
   { id: "opening", label: "Opening" },
   { id: "beginning", label: "Where It Began" },
   { id: "gallery", label: "Memories" },
   { id: "little-things", label: "Little Things" },
   { id: "letter", label: "Letter" },
-  { id: "celebration", label: "Celebration" },
-  { id: "future", label: "Next Chapters" },
-  { id: "final-reveal", label: "Surprise" },
+  { id: "final-reveal", label: "One Last Thing" },
 ];
 
-export default function StoryProgress() {
+export default function StoryProgress({
+  showCelebration = false,
+}: {
+  showCelebration?: boolean;
+}) {
+  const chapters = showCelebration
+    ? [...baseChapters, { id: "celebration", label: "Celebration" }]
+    : baseChapters;
   const [activeIndex, setActiveIndex] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [showLabels, setShowLabels] = useState(false);
@@ -38,8 +43,9 @@ export default function StoryProgress() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [showCelebration]);
 
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);

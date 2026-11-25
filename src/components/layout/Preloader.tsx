@@ -11,13 +11,13 @@ import gsap from "gsap";
  */
 export const PRELOADER_IMAGES = [
   // Item 1: Top-left floating memory
-  "https://picsum.photos/seed/pen33-item1/600/600",
+  "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010.42.36%20AM%20(1).jpeg?updatedAt=1795507538663",
   // Item 2: Top-right floating memory
-  "https://picsum.photos/seed/pen33-item2/600/600",
+  "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010.42.41%20AM%20(1).jpeg?updatedAt=1795507538848",
   // Item 3: Bottom-left floating memory
-  "https://picsum.photos/seed/pen33-item3/600/600",
+  "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010.42.36%20AM.jpeg?updatedAt=1795507538773",
   // Item 4: Bottom-right floating memory
-  "https://picsum.photos/seed/pen33-item4/600/600",
+  "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010.42.37%20AM%20(2).jpeg?updatedAt=1795507539200",
 ];
 
 /**
@@ -25,7 +25,7 @@ export const PRELOADER_IMAGES = [
  * Replace this with your custom wedding emblem / monogram image when ready.
  */
 export const PRELOADER_LOGO =
-  "https://picsum.photos/seed/pen33-logo/400/400";
+  "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010.42.35%20AM_p99MYuX_w.jpeg?updatedAt=1795507538875";
 // =========================================================================
 
 // Module-level guard: ensures preloader runs strictly ONCE per page load

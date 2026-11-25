@@ -56,6 +56,7 @@ export interface FutureContent {
 export interface FinalRevealContent {
   title: string;
   message: string;
+  image?: string;
 }
 
 export interface AnniversaryContent {
