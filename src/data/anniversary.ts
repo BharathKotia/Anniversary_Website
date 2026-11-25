@@ -141,13 +141,14 @@ export const anniversaryContent: AnniversaryContent = {
   letter: {
     title: "A letter for you",
     paragraphs: [
-      "If I could go back to the very first moment we met, I wouldn't change a single thing. Every awkward pause, every nervous smile, every uncertain glance — they all led us to exactly where we are now.",
-      "You've taught me that love isn't just about the big, cinematic moments. It's in the quiet mornings, the shared meals, the way you reach for my hand without thinking. It's in the way you see the best in me, even when I can't see it in myself.",
-      "There are days when the world feels heavy, and then you smile, and suddenly everything feels lighter. You are my favourite person, my safest place, and the greatest adventure I've ever been brave enough to take.",
-      "Thank you for choosing me. Thank you for staying. Thank you for being exactly who you are. I fall in love with you in a hundred new ways every single day, and I plan on doing that for every day that comes after this one.",
+      "I can’t believe we have completed one beautiful year together. This one year was a mix of everything — love, anger, fights, sadness, tears, happiness and lots of laughter.",
+      "We had good days and bad days, but one thing I noticed is that our bond became stronger day by day. I know both of us have made mistakes. Sometimes you may be right, and sometimes I may be right. But the best thing is that we are learning to understand each other and moving forward together.",
+      "Sometimes, I still feel guilty about a few things that happened in my life before our marriage. I really want to correct those things and make everything better. I know you also have a few things to improve, and I have things to improve too. Let’s both try to become better for each other.",
+      "Nobody is perfect, and nobody is made for each other from the beginning. Every couple faces problems in life. What matters is how we handle those problems and how strongly we stand together.,This year, our anniversary celebration is just between the two of us. But next year, I promise we will celebrate it in a much bigger and more beautiful way than you expect.",
+      "I LOVE YOU VIBHUS.",
     ],
-    signOff: "With all my love, forever and always",
-    signName: "Yours",
+    signOff: "Happy First Anniversary, my dear wife❤️",
+    signName: "Bubbu",
   },
 
   future: {
