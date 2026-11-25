@@ -2,10 +2,10 @@ import type { AnniversaryContent } from "@/types/anniversary";
 
 export const anniversaryContent: AnniversaryContent = {
   couple: {
-    firstName: "Vibhus",
-    secondName: "Bharath",
-    anniversaryDate: "27 November 2025",
-    title: "Happy Wedding Anniversary Vibhusss ♡ ",
+    firstName: "Name One",
+    secondName: "Name Two",
+    anniversaryDate: "23 November 2024",
+    title: "A Love Story, Written in Moments",
   },
 
   opening: {
@@ -16,47 +16,47 @@ export const anniversaryContent: AnniversaryContent = {
 
   beginning: {
     title: "It all started here",
-    date: "16 April 2022",
+    date: "23 November 2022",
     description:
       "Some stories begin with grand gestures. Ours began with a simple hello — the kind that changes everything without you even realising it. That day, the world shifted just a little, and suddenly, everything started to make a bit more sense.",
-    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(1).jpeg?updatedAt=1795506629723",
+    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2012.20.44%20PM.jpeg", // Hero image , bg image
     imageAlt: "A meaningful photograph from the beginning",
   },
 
   gallery: [
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(2).jpeg",
+      src: "https://ik.imagekit.io/3gs53o1vn/default-image.jpg?updatedAt=1795431366949", //
       alt: "Our first adventure together",
       caption: "The first of many adventures",
       date: "January 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/2bf475a2-a486-4f3c-90b1-be04d03da2ea.jpg",
+      src: "/images/gallery/memory-02.webp",
       alt: "A quiet evening together",
       caption: "Evenings like these",
       date: "March 2023",
       featured: true,
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010(1).42",
+      src: "/images/gallery/memory-03.webp",
       alt: "Exploring a new place",
       caption: "Lost and found",
       date: "June 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.25%20PM.jpeg",
+      src: "/images/gallery/memory-04.webp",
       alt: "Celebrating together",
       caption: "Celebrating us",
       date: "August 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.12%20PM.jpeg",
+      src: "/images/gallery/memory-05.webp",
       alt: "A favourite moment",
       caption: "My favourite smile",
       date: "November 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.10%20PM%20(1).jpeg",
+      src: "/images/gallery/memory-06.webp",
       alt: "Together in a new place",
       caption: "New places, same us",
       date: "February 2024",
@@ -107,14 +107,14 @@ export const anniversaryContent: AnniversaryContent = {
 
   littleThings: [
     {
-      title: "Morning coffee",
+      title: "Late night cravings",
       message:
-        "The way you always make my coffee just right, without me having to ask.",
+        "Because hunger doesn’t follow a clock. Discover your favourite midnight treats and satisfy every craving!.",
     },
     {
-      title: "Your laugh",
+      title: "Friday movie night",
       message:
-        "That laugh you do when something genuinely catches you off guard — it's my favourite sound.",
+        "Grab your favourite snacks, pick a movie and make your Friday night special.",
     },
     {
       title: "Late-night talks",
@@ -132,23 +132,22 @@ export const anniversaryContent: AnniversaryContent = {
         "Being next to you and not needing to say a word — that's when I know this is real.",
     },
     {
-      title: "Your patience",
+      title: "Your Forgiveness",
       message:
-        "The gentle way you understand me, even on the days I struggle to understand myself.",
+        "Everyone makes mistakes, but true love is about understanding, accepting and forgiving..",
     },
   ],
 
   letter: {
     title: "A letter for you",
     paragraphs: [
-      "I can’t believe we have completed one beautiful year together. This one year was a mix of everything — love, anger, fights, sadness, tears, happiness and lots of laughter.",
-      "We had good days and bad days, but one thing I noticed is that our bond became stronger day by day. I know both of us have made mistakes. Sometimes you may be right, and sometimes I may be right. But the best thing is that we are learning to understand each other and moving forward together.",
-      "Sometimes, I still feel guilty about a few things that happened in my life before our marriage. I really want to correct those things and make everything better. I know you also have a few things to improve, and I have things to improve too. Let’s both try to become better for each other.",
-      "Nobody is perfect, and nobody is made for each other from the beginning. Every couple faces problems in life. What matters is how we handle those problems and how strongly we stand together.,This year, our anniversary celebration is just between the two of us. But next year, I promise we will celebrate it in a much bigger and more beautiful way than you expect.",
-      "I LOVE YOU VIBHUS.",
+      "If I could go back to the very first moment we met, I wouldn't change a single thing. Every awkward pause, every nervous smile, every uncertain glance — they all led us to exactly where we are now.",
+      "You've taught me that love isn't just about the big, cinematic moments. It's in the quiet mornings, the shared meals, the way you reach for my hand without thinking. It's in the way you see the best in me, even when I can't see it in myself.",
+      "There are days when the world feels heavy, and then you smile, and suddenly everything feels lighter. You are my favourite person, my safest place, and the greatest adventure I've ever been brave enough to take.",
+      "Thank you for choosing me. Thank you for staying. Thank you for being exactly who you are. I fall in love with you in a hundred new ways every single day, and I plan on doing that for every day that comes after this one.",
     ],
-    signOff: "Happy First Anniversary, my dear wife❤️",
-    signName: "Bubbu",
+    signOff: "With all my love, forever and always",
+    signName: "Yours",
   },
 
   future: {
