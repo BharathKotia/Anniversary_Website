@@ -6,7 +6,6 @@ import StoryProgress from "@/components/layout/StoryProgress";
 import OpeningSection from "@/components/sections/OpeningSection";
 import BeginningSection from "@/components/sections/BeginningSection";
 import GallerySection from "@/components/sections/GallerySection";
-import TimelineSection from "@/components/sections/TimelineSection";
 import LittleThingsSection from "@/components/sections/LittleThingsSection";
 import LetterSection from "@/components/sections/LetterSection";
 import CelebrationSection from "@/components/sections/CelebrationSection";
@@ -19,7 +18,7 @@ export default function Home() {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
 
   return (
-    <div className="relative min-h-screen bg-wine text-cream font-body selection:bg-gold selection:text-wine w-full overflow-x-hidden">
+    <div className="relative min-h-screen bg-wine text-cream font-body selection:bg-gold selection:text-wine w-full" style={{ overflowX: "clip" }}>
       {/* ── Exact Expanding Circle & Floating Items Preloader ── */}
       <Preloader onComplete={() => setPreloaderComplete(true)} />
 
@@ -27,12 +26,11 @@ export default function Home() {
       <StoryProgress />
 
       {/* Main Experience Chapters */}
-      <main className="w-full overflow-x-hidden">
+      <main className="w-full" style={{ overflowX: "clip" }}>
         {/* Hero Section with Text Reveal Animation */}
         <OpeningSection startAnimation={preloaderComplete} />
         <BeginningSection />
         <GallerySection />
-        <TimelineSection />
         <LittleThingsSection />
         <LetterSection />
         <CelebrationSection />
