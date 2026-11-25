@@ -8,7 +8,6 @@ const chapters = [
   { id: "opening", label: "Opening" },
   { id: "beginning", label: "Where It Began" },
   { id: "gallery", label: "Memories" },
-  { id: "timeline", label: "Our Journey" },
   { id: "little-things", label: "Little Things" },
   { id: "letter", label: "Letter" },
   { id: "celebration", label: "Celebration" },

@@ -40,7 +40,7 @@ export default function BeginningSection() {
         <SectionHeading
         
           title={beginning.title}
-          subtitle={`Where two paths crossed on ${beginning.date}`}
+      
           light={false}
         />
 
