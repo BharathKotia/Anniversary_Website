@@ -2,10 +2,10 @@ import type { AnniversaryContent } from "@/types/anniversary";
 
 export const anniversaryContent: AnniversaryContent = {
   couple: {
-    firstName: "Vibhus",
-    secondName: "Bharath",
-    anniversaryDate: "27 November 2025",
-    title: "Happy Wedding Anniversary Vibhusss ♡ ",
+    firstName: "Name One",
+    secondName: "Name Two",
+    anniversaryDate: "23 November 2024",
+    title: "A Love Story, Written in Moments",
   },
 
   opening: {
@@ -16,47 +16,47 @@ export const anniversaryContent: AnniversaryContent = {
 
   beginning: {
     title: "It all started here",
-    date: "16 April 2022",
+    date: "23 November 2022",
     description:
       "Some stories begin with grand gestures. Ours began with a simple hello — the kind that changes everything without you even realising it. That day, the world shifted just a little, and suddenly, everything started to make a bit more sense.",
-    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(1).jpeg?updatedAt=1795506629723",
+    image: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2012.20.44%20PM.jpeg", // Hero image , bg image
     imageAlt: "A meaningful photograph from the beginning",
   },
 
   gallery: [
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.08.10%20PM%20(2).jpeg",
+      src: "https://ik.imagekit.io/3gs53o1vn/default-image.jpg?updatedAt=1795431366949", //
       alt: "Our first adventure together",
       caption: "The first of many adventures",
       date: "January 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/2bf475a2-a486-4f3c-90b1-be04d03da2ea.jpg",
+      src: "/images/gallery/memory-02.webp",
       alt: "A quiet evening together",
       caption: "Evenings like these",
       date: "March 2023",
       featured: true,
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%2010(1).42",
+      src: "/images/gallery/memory-03.webp",
       alt: "Exploring a new place",
       caption: "Lost and found",
       date: "June 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.25%20PM.jpeg",
+      src: "/images/gallery/memory-04.webp",
       alt: "Celebrating together",
       caption: "Celebrating us",
       date: "August 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.12%20PM.jpeg",
+      src: "/images/gallery/memory-05.webp",
       alt: "A favourite moment",
       caption: "My favourite smile",
       date: "November 2023",
     },
     {
-      src: "https://ik.imagekit.io/3gs53o1vn/WhatsApp%20Image%202026-11-24%20at%201.27.10%20PM%20(1).jpeg",
+      src: "/images/gallery/memory-06.webp",
       alt: "Together in a new place",
       caption: "New places, same us",
       date: "February 2024",
@@ -107,14 +107,14 @@ export const anniversaryContent: AnniversaryContent = {
 
   littleThings: [
     {
-      title: "Morning coffee",
+      title: "Late night cravings",
       message:
-        "The way you always make my coffee just right, without me having to ask.",
+        "Because hunger doesn’t follow a clock. Discover your favourite midnight treats and satisfy every craving!.",
     },
     {
-      title: "Your laugh",
+      title: "Friday movie night",
       message:
-        "That laugh you do when something genuinely catches you off guard — it's my favourite sound.",
+        "Grab your favourite snacks, pick a movie and make your Friday night special.",
     },
     {
       title: "Late-night talks",
@@ -132,9 +132,9 @@ export const anniversaryContent: AnniversaryContent = {
         "Being next to you and not needing to say a word — that's when I know this is real.",
     },
     {
-      title: "Your patience",
+      title: "Your Forgiveness",
       message:
-        "The gentle way you understand me, even on the days I struggle to understand myself.",
+        "Everyone makes mistakes, but true love is about understanding, accepting and forgiving..",
     },
   ],
 

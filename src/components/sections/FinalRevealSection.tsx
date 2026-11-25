@@ -2,15 +2,31 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
-import { Heart, Sparkles, RotateCcw, Gift } from "lucide-react";
+import { Heart, Sparkles, RotateCcw, Gift, ArrowDown } from "lucide-react";
 import { anniversaryContent } from "@/data/anniversary";
 import SectionHeading from "@/components/ui/SectionHeading";
 import Button from "@/components/ui/Button";
 
-export default function FinalRevealSection() {
+interface FinalRevealSectionProps {
+  onReveal?: () => void;
+}
+
+export default function FinalRevealSection({ onReveal }: FinalRevealSectionProps) {
   const { finalReveal, couple } = anniversaryContent;
   const [isRevealed, setIsRevealed] = useState(false);
   const prefersReducedMotion = useReducedMotion();
+
+  const handleUnwrap = () => {
+    setIsRevealed(true);
+    onReveal?.();
+  };
+
+  const handleScrollToCelebration = () => {
+    const celebrationEl = document.getElementById("celebration");
+    if (celebrationEl) {
+      celebrationEl.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   const handleReplay = () => {
     const openingEl = document.getElementById("opening");
@@ -41,7 +57,6 @@ export default function FinalRevealSection() {
         <SectionHeading
           eyebrow="A Keepsake For You"
           title="One Last Thing..."
-          subtitle="Before this chapter closes, there is something I want to give you."
           light={true}
         />
 
@@ -59,7 +74,7 @@ export default function FinalRevealSection() {
               >
                 <motion.button
                   type="button"
-                  onClick={() => setIsRevealed(true)}
+                  onClick={handleUnwrap}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="group relative flex h-36 w-36 sm:h-44 sm:w-44 items-center justify-center bg-wine border-2 border-gold/60 shadow-2xl shadow-black/40 transition-all cursor-pointer focus:outline-none focus-visible:ring-4 focus-visible:ring-gold"
@@ -111,15 +126,23 @@ export default function FinalRevealSection() {
                   <Sparkles className="h-5 w-5" />
                 </div>
 
-                {/* Replay Button */}
-                <div className="mt-10 pt-8 border-t border-gold/30 flex justify-center">
+                {/* Action Buttons */}
+                <div className="mt-10 pt-8 border-t border-gold/30 flex flex-wrap items-center justify-center gap-4">
                   <Button
                     variant="primary"
-                    onClick={handleReplay}
+                    onClick={handleScrollToCelebration}
                     className="flex items-center gap-2"
                   >
+                    <span>See Your Anniversary Surprise</span>
+                    <ArrowDown className="h-4 w-4 animate-bounce" />
+                  </Button>
+                  <Button
+                    variant="secondary"
+                    onClick={handleReplay}
+                    className="flex items-center gap-2 border-wine/30 text-wine hover:bg-wine/10"
+                  >
                     <RotateCcw className="h-4 w-4" />
-                    <span>Replay Our Story</span>
+                    <span>Replay Story</span>
                   </Button>
                 </div>
               </motion.div>
