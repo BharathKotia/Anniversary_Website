@@ -130,14 +130,7 @@ export default function FinalRevealSection({ onReveal }: FinalRevealSectionProps
                     <span>Click here </span>
                     <ArrowDown className="h-4 w-4 animate-bounce" />
                   </Button>
-                  <Button
-                    variant="secondary"
-                    onClick={handleReplay}
-                    className="flex items-center gap-2 border-wine/30 text-wine hover:bg-wine/10"
-                  >
-                    <RotateCcw className="h-4 w-4" />
-                    <span>Replay Story</span>
-                  </Button>
+            
                 </div>
               </motion.div>
             )}
