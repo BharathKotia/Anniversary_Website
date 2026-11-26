@@ -7,7 +7,7 @@ import {
   useReducedMotion,
   AnimatePresence,
 } from "motion/react";
-import { Volume2, VolumeX, Sparkles, Eye } from "lucide-react";
+import { Play, Pause, Sparkles, Eye } from "lucide-react";
 import { anniversaryContent } from "@/data/anniversary";
 import { cn } from "@/lib/utils";
 
@@ -235,9 +235,7 @@ function ScratchRevealPhoto({
     ctx.textAlign = "center";
     ctx.textBaseline = "middle";
 
-    ctx.fillStyle = "rgba(226, 196, 141, 0.9)";
-    ctx.font = `600 ${Math.max(11, Math.min(14, w * 0.015))}px sans-serif`;
-    ctx.fillText("A SPECIAL SURPRISE AWAITS", w / 2, h / 2 - 42);
+  
 
     ctx.fillStyle = "#F7EAD7";
     ctx.font = `400 ${Math.max(26, Math.min(52, w * 0.045))}px Georgia, serif`;
@@ -472,6 +470,7 @@ export default function CelebrationSection() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [audioAvailable, setAudioAvailable] = useState(true);
+  const [isScratchCompleted, setIsScratchCompleted] = useState(false);
 
   const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
@@ -510,6 +509,11 @@ export default function CelebrationSection() {
         /* Ignore autoplay restriction errors if browser blocks mid-drag */
       });
   }, []);
+
+  const handleScratchComplete = useCallback(() => {
+    setIsScratchCompleted(true);
+    playSong();
+  }, [playSong]);
 
   const toggleAudio = useCallback(() => {
     const audio = audioRef.current;
@@ -608,8 +612,37 @@ export default function CelebrationSection() {
         imageSrc={surpriseImage}
         coupleNames={`${firstName} & ${secondName}`}
         prefersReducedMotion={prefersReducedMotion}
-        onComplete={playSong}
+        onComplete={handleScratchComplete}
       />
+
+      {/* Floating Bottom-Right Play / Pause Icon Button (visible only after scratch completes) */}
+      <AnimatePresence>
+        {isScratchCompleted && audioAvailable && (
+          <motion.button
+            type="button"
+            onClick={toggleAudio}
+            initial={{ opacity: 0, scale: 0.7, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.7, y: 16 }}
+            transition={{ duration: 0.35, ease: "easeOut" }}
+            aria-label={isPlaying ? "Pause song" : "Play song"}
+            className={cn(
+              "fixed bottom-5 right-4 sm:bottom-7 sm:right-7 z-50",
+              "flex h-12 w-12 items-center justify-center rounded-full shadow-2xl backdrop-blur-md transition-all duration-300 cursor-pointer",
+              "focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
+              isPlaying
+                ? "bg-wine/90 text-gold border border-gold/60 hover:border-gold hover:scale-105"
+                : "bg-gold text-wine border border-gold-bright hover:scale-105"
+            )}
+          >
+            {isPlaying ? (
+              <Pause className="h-5 w-5" />
+            ) : (
+              <Play className="h-5 w-5 translate-x-[1px]" />
+            )}
+          </motion.button>
+        )}
+      </AnimatePresence>
     </motion.section>
   );
 }

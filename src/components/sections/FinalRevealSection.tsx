@@ -127,7 +127,7 @@ export default function FinalRevealSection({ onReveal }: FinalRevealSectionProps
                     onClick={handleScrollToCelebration}
                     className="flex items-center gap-2"
                   >
-                    <span>See Your Anniversary Surprise</span>
+                    <span>Click here </span>
                     <ArrowDown className="h-4 w-4 animate-bounce" />
                   </Button>
                   <Button

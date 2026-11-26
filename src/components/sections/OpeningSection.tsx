@@ -122,15 +122,15 @@ export default function OpeningSection({
     }
   }, [startAnimation]);
 
-  // Split headline title into characters
-  const titleChars = couple.title.split("");
+  // Split headline title into words -> characters so words wrap cleanly on mobile without breaking mid-word
+  const titleWords = couple.title.split(" ");
   const coupleNames = `${couple.firstName} & ${couple.secondName}`;
 
   return (
     <section
       ref={sectionRef}
       id="opening"
-      className="relative h-screen w-full overflow-hidden flex flex-col justify-between"
+      className="relative h-[100dvh] min-h-[600px] w-full overflow-hidden flex flex-col justify-between"
       aria-label="Hero"
     >
       {/* ── Fullscreen Background Image (100vw, 100vh) ── */}
@@ -156,48 +156,50 @@ export default function OpeningSection({
       </div>
 
       {/* ── Top Header Area: Spacious breathing room between top of screen and eyebrow ── */}
-      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28 lg:pt-2 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      <div className="relative z-10 w-full pt-10 sm:pt-20 md:pt-24 lg:pt-10 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Eyebrow with reveal mask */}
-        <div className="overflow-hidden mt-3 mb-3">
-          <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm  uppercase text-gold font-medium drop-shadow-md  ">
+        <div className="overflow-hidden mt-2 mb-2 sm:mt-3 sm:mb-3">
+          <span className="hero-reveal-line inline-block font-body text-[11px] sm:text-sm tracking-[0.22em] uppercase text-gold font-medium drop-shadow-md">
             {opening.eyebrow}
           </span>
         </div>
 
-        {/* Headline with Elastic Character Pop Reveal */}
-        <h1 className="font-display flex text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-cream tracking-tight leading-tight max-w-3xl drop-shadow-lg select-none">
-          {titleChars.map((char, index) => (
-            <span
-              key={index}
-              className="hero-headline-char font-handwritten inline-block will-change-transform"
-            >
-              {char === " " ? "\u00A0" : char}
+        {/* Headline with Elastic Character Pop Reveal (word-wrapped for mobile) */}
+        <h1 className="font-display flex  flex-wrap md:flex-nowrap justify-center items-center gap-x-[0.28em] gap-y-1 text-[2.15rem] sm:text-4xl md:text-5xl lg:text-6xl font-normal text-cream tracking-tight leading-[1.15] max-w-3xl w-full px-2 drop-shadow-lg select-none">
+          {titleWords.map((word, wordIdx) => (
+            <span key={wordIdx} className="inline-flex whitespace-nowrap">
+              {word.split("").map((char, charIdx) => (
+                <span
+                  key={charIdx}
+                  className="hero-headline-char font-handwritten inline-block will-change-transform"
+                >
+                  {char}
+                </span>
+              ))}
             </span>
           ))}
         </h1>
 
         {/* Names & Anniversary Subheadline */}
-        <div className="mt-3 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-cream/90 drop-shadow-md overflow-hidden">
-          <span className="font-display text-xl sm:text-2xl md:text-3xl text-gold-bright">
+        <div className="mt-3 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-cream/90 drop-shadow-md overflow-hidden max-w-full px-2">
+          <span className="font-display text-lg sm:text-2xl md:text-3xl text-gold-bright flex flex-wrap justify-center">
             {coupleNames.split("").map((c, i) => (
               <span key={i} className="hero-subheadline-char inline-block">
                 {c === " " ? "\u00A0" : c}
               </span>
             ))}
           </span>
-          
-      
         </div>
 
         {/* Delicate divider line */}
-        <div className="mt-5 flex items-center justify-center w-full">
-          <div className="h-px w-20 bg-gold/60 shadow-sm" />
+        <div className="mt-4 sm:mt-5 flex items-center justify-center w-full">
+          <div className="h-px w-16 sm:w-20 bg-gold/60 shadow-sm" />
         </div>
       </div>
 
       {/* ── Bottom Section with Tagline & Scroll Cue ── */}
-      <div className="hero-footer-cta relative z-10 w-full pb-8 sm:pb-12 px-4 text-center flex flex-col items-center">
-        <p className="hero-headline-char text-xl sm:text-2xl md:text-3xl text-cream/90 drop-shadow-md max-w-md">
+      <div className="hero-footer-cta relative z-10 w-full pb-10 sm:pb-12 px-4 text-center flex flex-col items-center">
+        <p className="hero-headline-char text-lg sm:text-2xl md:text-3xl text-cream/90 drop-shadow-md max-w-xs sm:max-w-md leading-snug">
           &ldquo;{opening.message}&rdquo;
         </p>
 

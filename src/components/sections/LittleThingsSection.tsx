@@ -11,7 +11,6 @@ export default function LittleThingsSection() {
   const { littleThings } = anniversaryContent;
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [tappedIndex, setTappedIndex] = useState<number | null>(null);
-  const [focusedIndex, setFocusedIndex] = useState<number | null>(null);
 
   return (
     <section
@@ -46,15 +45,14 @@ export default function LittleThingsSection() {
           className="mb-10 inline-flex items-center gap-2 rounded-full border border-gold/35 bg-gold/10 px-5 py-2 text-xs font-body tracking-[0.2em] uppercase text-gold/90"
         >
           <Sparkles className="h-3.5 w-3.5 text-gold animate-pulse" />
-          <span>Hover over a card to reveal</span>
+          <span className="hidden md:inline">Hover over a card to reveal</span>
+          <span className="md:hidden">Touch a card to explore</span>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 w-full">
           {littleThings.map((thing, index) => {
             const isRevealed =
-              hoveredIndex === index ||
-              tappedIndex === index ||
-              focusedIndex === index;
+              hoveredIndex === index || tappedIndex === index;
 
             return (
               <motion.article
@@ -88,8 +86,6 @@ export default function LittleThingsSection() {
                       setTappedIndex((prev) => (prev === index ? null : index));
                     }
                   }}
-                  onFocus={() => setFocusedIndex(index)}
-                  onBlur={() => setFocusedIndex(null)}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
@@ -151,7 +147,8 @@ export default function LittleThingsSection() {
                     >
                       <span className="inline-flex items-center gap-1.5 pt-3 font-body text-[11px] tracking-[0.2em] uppercase text-gold/75">
                         <Sparkles className="h-3 w-3 text-gold/80 animate-pulse" />
-                        <span>Hover to reveal</span>
+                        <span className="hidden md:inline">Hover to reveal</span>
+                        <span className="md:hidden">Touch to explore</span>
                       </span>
                     </motion.div>
 

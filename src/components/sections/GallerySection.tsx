@@ -1,12 +1,16 @@
 "use client";
 
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { Lock, Unlock } from "lucide-react";
 import { anniversaryContent } from "@/data/anniversary";
 import InfiniteMenu from "@/components/gallery/InfiniteMenu";
 import SectionHeading from "@/components/ui/SectionHeading";
+import { cn } from "@/lib/utils";
 
 export default function GallerySection() {
   const { gallery } = anniversaryContent;
+  const [isMobileLocked, setIsMobileLocked] = useState(false);
+
   const menuItems = useMemo(
     () =>
       gallery.map((photo) => ({
@@ -16,6 +20,16 @@ export default function GallerySection() {
       })),
     [gallery]
   );
+
+  /* Lock page scroll on mobile while user interacts with the 3D gallery */
+  useEffect(() => {
+    if (!isMobileLocked) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [isMobileLocked]);
 
   return (
     <section
@@ -32,7 +46,12 @@ export default function GallerySection() {
         }}
       />
 
-      <div className="absolute inset-0">
+      <div
+        className={cn(
+          "absolute inset-0 md:pointer-events-auto",
+          isMobileLocked ? "pointer-events-auto" : "pointer-events-none"
+        )}
+      >
         <InfiniteMenu
             items={menuItems}
             count={160}
@@ -59,6 +78,52 @@ export default function GallerySection() {
           light
             className="!mb-0"
         />
+      </div>
+
+      {/* Mobile-only Scroll Lock / Interact Toggle (Icon Button + Tooltip on Top) */}
+      <div className="md:hidden absolute bottom-5 right-4 z-30 flex flex-col items-end gap-2">
+        {/* Tooltip label on top */}
+        <div
+          role="tooltip"
+          className={cn(
+            "pointer-events-none relative rounded-lg px-3 py-1.5 text-[11px] font-body font-medium tracking-wider uppercase shadow-lg backdrop-blur-md whitespace-nowrap transition-all duration-300",
+            isMobileLocked
+              ? "bg-gold text-wine border border-gold-bright"
+              : "bg-wine/90 text-cream border border-gold/45"
+          )}
+        >
+          <span>{isMobileLocked ? "Back to Scroll" : "Tap to Lock & Explore"}</span>
+          {/* Tooltip arrow pointing down to icon button */}
+          <span
+            aria-hidden="true"
+            className={cn(
+              "absolute -bottom-1 right-4 h-2 w-2 rotate-45 border-r border-b",
+              isMobileLocked
+                ? "bg-gold border-gold-bright"
+                : "bg-wine/90 border-gold/45"
+            )}
+          />
+        </div>
+
+        {/* Icon-only button */}
+        <button
+          type="button"
+          onClick={() => setIsMobileLocked((prev) => !prev)}
+          aria-pressed={isMobileLocked}
+          aria-label={isMobileLocked ? "Back to Scroll" : "Tap to Lock & Explore"}
+          className={cn(
+            "flex h-11 w-11 items-center justify-center rounded-full shadow-xl transition-all duration-300 backdrop-blur-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gold",
+            isMobileLocked
+              ? "bg-gold text-wine border border-gold-bright scale-105"
+              : "bg-wine/90 text-gold border border-gold/50 hover:border-gold"
+          )}
+        >
+          {isMobileLocked ? (
+            <Unlock className="h-4 w-4" />
+          ) : (
+            <Lock className="h-4 w-4" />
+          )}
+        </button>
       </div>
     </section>
   );
