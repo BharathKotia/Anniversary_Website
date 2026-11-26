@@ -68,7 +68,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Creator credit */}
+        {/* Footer */}
         <div className="relative mt-4 flex flex-col items-center gap-1.5">
           <div className="h-px w-20 bg-gold/50 mb-4" aria-hidden="true" />
           <p className="font-body text-xs text-cream/50 tracking-[0.25em] uppercase">
