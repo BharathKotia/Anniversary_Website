@@ -80,7 +80,7 @@ export default function Home() {
           <p className="font-body text-sm text-cream/60 mt-1">
             for{" "}
             <span className="font-display text-xl text-cream font-normal">
-              {couple.secondName}
+              {couple.firstName}
             </span>
           </p>
         </div>

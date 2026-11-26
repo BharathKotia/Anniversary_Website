@@ -570,7 +570,7 @@ export default function CelebrationSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="mb-4 font-body text-xs sm:text-sm tracking-[0.3em] uppercase text-gold"
           >
-            {anniversaryDate}
+            27 November 2026
           </motion.span>
 
           {/* Main title */}
