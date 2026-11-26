@@ -130,13 +130,15 @@
 
 .infinite-menu__info[data-layout='stacked'] .infinite-menu__description {
   top: auto;
-  right: 88px;
-  bottom: 22px;
+  right: 20px;
+  bottom: 145px;
   left: 20px;
-  max-width: 36ch;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  max-width: none;
+  font-size: clamp(1.15rem, 5cqw, 1.5rem);
+  line-height: 1.45;
+  text-align: center;
+  opacity: 0.95;
+  white-space: normal;
   transform: none;
 }
 
