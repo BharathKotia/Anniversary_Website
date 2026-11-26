@@ -60,7 +60,7 @@ export default function Home() {
           </div>
 
           <p className="font-body text-xs sm:text-sm text-cream/60 tracking-widest uppercase">
-            {couple.anniversaryDate} &bull; {couple.title}
+           27 November 2026 &bull; {couple.title}
           </p>
 
           <p className="font-handwritten text-xl text-gold">

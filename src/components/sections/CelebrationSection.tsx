@@ -556,7 +556,7 @@ export default function CelebrationSection() {
       aria-label="Anniversary celebration"
     >
       {/* Headline & Intro Block */}
-      <div className="relative w-full py-24 md:py-32 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
+      <div className="relative w-full py-10 md:py-18 px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center">
         {/* Background glow */}
         <div
           className="pointer-events-none absolute inset-0"
@@ -590,18 +590,11 @@ export default function CelebrationSection() {
           <motion.div
             {...fadeUp}
             transition={{ duration: 0.7, delay: 0.3, ease: "easeOut" }}
-            className="mb-8 h-px w-24 bg-gold/60"
+            className=" h-px w-24 bg-gold/60"
             aria-hidden="true"
           />
 
-          {/* Message */}
-          <motion.p
-            {...fadeUp}
-            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="max-w-xl font-body text-lg sm:text-xl leading-relaxed text-cream/80"
-          >
-            {message}
-          </motion.p>
+         
 
       
         </div>
