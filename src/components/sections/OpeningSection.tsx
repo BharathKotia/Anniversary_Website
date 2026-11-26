@@ -156,7 +156,7 @@ export default function OpeningSection({
       </div>
 
       {/* ── Top Header Area: Spacious breathing room between top of screen and eyebrow ── */}
-      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28 lg:pt-32 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
+      <div className="relative z-10 w-full pt-20 sm:pt-24 md:pt-28 lg:pt-2 px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
         {/* Eyebrow with reveal mask */}
         <div className="overflow-hidden mt-3 mb-3">
           <span className="hero-reveal-line inline-block font-body text-xs sm:text-sm  uppercase text-gold font-medium drop-shadow-md  ">
@@ -177,7 +177,7 @@ export default function OpeningSection({
         </h1>
 
         {/* Names & Anniversary Subheadline */}
-        <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-cream/90 drop-shadow-md overflow-hidden">
+        <div className="mt-3 sm:mt-5 flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-cream/90 drop-shadow-md overflow-hidden">
           <span className="font-display text-xl sm:text-2xl md:text-3xl text-gold-bright">
             {coupleNames.split("").map((c, i) => (
               <span key={i} className="hero-subheadline-char inline-block">

@@ -108,13 +108,7 @@ export default function FinalRevealSection({ onReveal }: FinalRevealSectionProps
                   <Heart className="h-10 w-10 fill-wine text-wine" />
                 </motion.div>
 
-                <span className="font-body text-xs uppercase tracking-[0.3em] text-gold block mb-2">
-                  Happy Anniversary
-                </span>
-
-                <h3 className="font-display text-4xl sm:text-5xl font-normal tracking-tight text-wine">
-                  {couple.firstName} &amp; {couple.secondName}
-                </h3>
+               
 
                 <p className="mt-6 font-body text-lg sm:text-xl leading-relaxed text-ink/80">
                   &ldquo;{finalReveal.message}&rdquo;
